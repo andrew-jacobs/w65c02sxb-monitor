@@ -1,0 +1,1 @@
+SXB -port COM6 %*
