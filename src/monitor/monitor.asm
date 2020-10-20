@@ -328,13 +328,6 @@ RESET:
 		 cpx	#4
 		until eq
 
-         ;       lda     #$1c            ; Configure VIA for USB FIFO
-        ;        sta     VIA2_DDRB
-       ;         lda     #$18
-        ;        sta     VIA2_ORB
-
-	;	cli			; Allow interrupts
-
 		jsr	NewLine
 		ldx	#TTL_STR
 		jsr	ShowString
@@ -2324,10 +2317,6 @@ NMI:		rti			; Done
 UartTx:
 		pha
                 phx
-;	jsr $84f0
-;	plx
-;	pla
-;	rts
 		tax
 		
                 lda     #$01
@@ -2351,9 +2340,6 @@ TxWait:         bit     VIA2_IRB        ; Is there space for more data
 
 UartRx:
                 phx                     ; Save callers X
-;	jsr $84cb
-;	plx
-;	rts
 		
                 lda     #$02            ; Wait until data in buffer
 RxWait:         bit     VIA2_IRB

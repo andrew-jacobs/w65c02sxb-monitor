@@ -656,13 +656,6 @@ Portable 65xx Assembler [20.01]
 00:009D' E004              :                  cpx    #4
 00:009F' D0F5              :                 until eq
 
-                                      ;       lda     #$1c            ; Configure VIA for USB FIFO
-                                     ;        sta     VIA2_DDRB
-                                    ;         lda     #$18
-                                     ;        sta     VIA2_ORB
-
-                                     ;       cli                     ; Allow interrupts
-
 00:00A1' 20????            :                 jsr     NewLine
 00:00A4' A200              :                 ldx     #TTL_STR
 00:00A6' 20????            :                 jsr     ShowString
@@ -682,9 +675,6 @@ Portable 65xx Assembler [20.01]
                              ;-------------------------------------------------------------------------------
 
                              BRK:
-
-Portable 65xx Assembler [20.01]
-
 00:00B4' 68                :                 pla                     ; Pull off saved registers
 00:00B5' 85F2              :                 sta     Y_REG
 00:00B7' 68                :                 pla
@@ -692,6 +682,9 @@ Portable 65xx Assembler [20.01]
 00:00BA' 68                :                 pla
 00:00BB' 85F0              :                 sta     A_REG
 00:00BD' 68                :                 pla
+
+Portable 65xx Assembler [20.01]
+
 00:00BE' 85F3              :                 sta     P_REG
 00:00C0' 38                :                 sec                     ; Move PC back to BRK
 00:00C1' 68                :                 pla
@@ -739,9 +732,6 @@ Portable 65xx Assembler [20.01]
 00:00EB' A200              :                 ldx     #0              ; Output prepared command
                                              repeat
 00:00ED' E4F6              :                  cpx    CMD_LEN         ; Any saved characters to display?
-
-Portable 65xx Assembler [20.01]
-
 00:00EF' B009              :                  break  cs              ; No
 00:00F1' BD0002            :                  lda    COMMAND,x       ; Yes, print from the buffer
 00:00F4' 20????            :                  jsr    UartTx
@@ -749,6 +739,9 @@ Portable 65xx Assembler [20.01]
 00:00F8' 80F3              :                 forever
 
 00:00FA' A911              :                 lda     #DC1            ; Send XON
+
+Portable 65xx Assembler [20.01]
+
 00:00FC' 20????            :                 jsr     UartTx
                                              repeat
 00:00FF' 20????            :                  jsr    UartRx          ; Wait for some user input
@@ -796,15 +789,15 @@ Portable 65xx Assembler [20.01]
 00:013E' A913              :                 lda     #DC3            ; Send XOFF
 00:0140' 20????            :                 jsr     UartTx
 
-
-Portable 65xx Assembler [20.01]
-
 00:0143' A200              :                 ldx     #0              ; Set character offset to start
 00:0145' 20????            :                 jsr     SkipSpaces      ; And get first character
 00:0148' B097              :                 bcs     NewCommand
 
 00:014A' C90D              :                 cmp     #CR             ; Empty line?
 00:014C' F093              :                 beq     NewCommand      ; Yes
+
+
+Portable 65xx Assembler [20.01]
 
                              ;===============================================================================
                              ; 'D' - Disassemble Memory
@@ -853,15 +846,15 @@ Portable 65xx Assembler [20.01]
 00:0198' B01C              :                   bcs   .FillFail
 00:019A' 20????            :                   jsr   SetEndAddr
 00:019D' 20????            :                   jsr   GetByte         ; Extract fill byte
-
-Portable 65xx Assembler [20.01]
-
 00:01A0' B014              :                   bcs   .FillFail
 
                                                repeat
 00:01A2' A000              :                    ldy  #0              ; Perform the fill
 00:01A4' A5FB              :                    lda  TEMP+0
 00:01A6' 91F7              :                    sta  (ADDR_S),y
+
+
+Portable 65xx Assembler [20.01]
 
 00:01A8' C8                :                    iny
 00:01A9' 98                :                    tya
@@ -910,9 +903,6 @@ Portable 65xx Assembler [20.01]
                              ;-------------------------------------------------------------------------------
 
 00:01E2' C94D              :                 cmp     #'M'
-
-Portable 65xx Assembler [20.01]
-
 00:01E4' D060              :                 if      eq
 00:01E6' 20????            :                  jsr    GetWord         ; Extract start address
 00:01E9' B058              :                  if     cc
@@ -920,6 +910,9 @@ Portable 65xx Assembler [20.01]
 00:01EE' 20????            :                   jsr   SetEndAddr
 00:01F1' 20????            :                   jsr   GetWord         ; Extract end address
 00:01F4' B005              :                   if    cc
+
+Portable 65xx Assembler [20.01]
+
 00:01F6' 20????            :                    jsr  SetEndAddr
 00:01F9' 8002              :                   else
 00:01FB' E6FA              :                    inc  ADDR_E+1        ; Or default to start + 256
@@ -967,9 +960,6 @@ Portable 65xx Assembler [20.01]
                                              endif
 
                              ;===============================================================================
-
-Portable 65xx Assembler [20.01]
-
                              ; 'R' - Show Registers
                              ;-------------------------------------------------------------------------------
 
@@ -977,6 +967,9 @@ Portable 65xx Assembler [20.01]
 00:0248' D003              :                 if      eq
 00:024A' 4C????            :                  jmp    ShowRegisters
                                              endif
+
+Portable 65xx Assembler [20.01]
+
 
                              ;===============================================================================
                              ; 'S' - S19 Record Loader
@@ -1024,9 +1017,6 @@ Portable 65xx Assembler [20.01]
                                                endif
                                               endif
 00:029F' 4C????            :                  jmp    NewCommand
-
-Portable 65xx Assembler [20.01]
-
                                              endif
 
                              ;===============================================================================
@@ -1034,6 +1024,9 @@ Portable 65xx Assembler [20.01]
                              ;-------------------------------------------------------------------------------
 
 00:02A2' C954              :                 cmp     #'T'
+
+Portable 65xx Assembler [20.01]
+
 00:02A4' F0034C????        :                 if eq
 00:02A9' 20????            :                  jsr    GetWord         ; Extract start address
 00:02AC' B008              :                  if cc
@@ -1081,9 +1074,6 @@ Portable 65xx Assembler [20.01]
 
 00:02F1' A000              :                  ldy    #0
 00:02F3' B1F4              :                  lda    (PC_REG),y      ; Fetch the next opcode
-
-Portable 65xx Assembler [20.01]
-
 00:02F5' E6F4              :                  inc    PC_REG+0        ; .. and bump PC
 00:02F7' D002              :                  if eq
 00:02F9' E6F5              :                   inc   PC_REG+1
@@ -1091,6 +1081,9 @@ Portable 65xx Assembler [20.01]
 00:02FB' AA                :                  tax
 00:02FC' BD????            :                  lda    MODES,X         ; Extract address type
 00:02FF' 2903              :                  and    #MB_ABS
+
+Portable 65xx Assembler [20.01]
+
 00:0301' C901              :                  cmp    #MB_ZPG         ; Zero page?
 00:0303' D00E              :                  if eq
 00:0305' B1F4              :                   lda   (PC_REG),y
@@ -1138,9 +1131,6 @@ Portable 65xx Assembler [20.01]
 00:0349' 65F7              :                   adc   ADDR_S+0
 00:034B' 85F7              :                   sta   ADDR_S+0
 00:034D' 9002              :                   if cs
-
-Portable 65xx Assembler [20.01]
-
 00:034F' E6F8              :                    inc  ADDR_S+1
                                                endif
 
@@ -1148,6 +1138,9 @@ Portable 65xx Assembler [20.01]
 00:0353' DD????            :                   cmp   MODES,x
 00:0356' D002              :                   if eq
 00:0358' 84F8              :                    sty  ADDR_S+1
+
+Portable 65xx Assembler [20.01]
+
                                                endif
 
 00:035A' A989              :                   lda   #MO_IZX         ; .. and (ZPG,X)
@@ -1195,9 +1188,6 @@ Portable 65xx Assembler [20.01]
 00:0392' 85F7              :                   sta   ADDR_S+0
 00:0394' 9002              :                   if cs
 00:0396' E6F8              :                    inc  ADDR_S+1
-
-Portable 65xx Assembler [20.01]
-
                                                endif
 
 00:0398' A901              :                   lda   #MB_ZPG         ; Restrict to zero page
@@ -1205,6 +1195,9 @@ Portable 65xx Assembler [20.01]
 00:039D' F002              :                   if ne
 00:039F' A4F8              :                    ldy  ADDR_S+1
                                                endif
+
+Portable 65xx Assembler [20.01]
+
                                               endif
 
 00:03A1' A940              :                  lda    #MB_REL         ; Relative address?
@@ -1252,9 +1245,6 @@ Portable 65xx Assembler [20.01]
 00:03E5' ????              :                 .word   EM_BMI-1
 00:03E7' ????              :                 .word   EM_BNE-1
 00:03E9' ????              :                 .word   EM_BPL-1
-
-Portable 65xx Assembler [20.01]
-
 00:03EB' ????              :                 .word   EM_BRA-1
 00:03ED' ????              :                 .word   EM_BRK-1
 00:03EF' ????              :                 .word   EM_BVC-1
@@ -1262,6 +1252,9 @@ Portable 65xx Assembler [20.01]
 00:03F3' ????              :                 .word   EM_CLC-1
 00:03F5' ????              :                 .word   EM_CLD-1
 00:03F7' ????              :                 .word   EM_CLI-1
+
+Portable 65xx Assembler [20.01]
+
 00:03F9' ????              :                 .word   EM_CLV-1
 00:03FB' ????              :                 .word   EM_CMP-1
 00:03FD' ????              :                 .word   EM_CPX-1
@@ -1309,15 +1302,15 @@ Portable 65xx Assembler [20.01]
 00:0451' ????              :                 .word   EM_TSB-1
 00:0453' ????              :                 .word   EM_TRB-1
 00:0455' ????              :                 .word   EM_TXS-1
-
-Portable 65xx Assembler [20.01]
-
 00:0457' ????              :                 .word   EM_TXA-1
 00:0459' ????              :                 .word   EM_TXS-1
 00:045B' ????              :                 .word   EM_TYA-1
 00:045D' ????              :                 .word   EM_WAI-1
 
                              ;-------------------------------------------------------------------------------
+
+
+Portable 65xx Assembler [20.01]
 
                              EM_CLC:
 00:045F' 18                :                  clc
@@ -1366,9 +1359,6 @@ Portable 65xx Assembler [20.01]
                              EM_CPY:
 00:0488' A5F2              :                  lda    Y_REG
 
-
-Portable 65xx Assembler [20.01]
-
                              EM_CMP:
 00:048A' D1F7              :                  cmp    (ADDR_S),y
 00:048C' 4C????            :                  jmp    SaveP
@@ -1376,6 +1366,9 @@ Portable 65xx Assembler [20.01]
                              ;-------------------------------------------------------------------------------
 
                              EM_AND:
+
+Portable 65xx Assembler [20.01]
+
 00:048F' 31F7              :                  and    (ADDR_S),y
 00:0491' 4C????            :                  jmp    SaveAP
 
@@ -1423,9 +1416,6 @@ Portable 65xx Assembler [20.01]
 00:04C8' 91F7              :                  sta    (ADDR_S),y
 00:04CA' 4C????            :                  jmp    SaveP
 
-
-Portable 65xx Assembler [20.01]
-
                              EM_ROL:
 00:04CD' B1F7              :                  lda    (ADDR_S),y
 00:04CF' 2A                :                  rol    a
@@ -1433,6 +1423,9 @@ Portable 65xx Assembler [20.01]
 00:04D2' 4C????            :                  jmp    SaveP
 
                              EM_ROR:
+
+Portable 65xx Assembler [20.01]
+
 00:04D5' B1F7              :                  lda    (ADDR_S),y
 00:04D7' 6A                :                  ror    a
 00:04D8' 91F7              :                  sta    (ADDR_S),y
@@ -1480,9 +1473,6 @@ Portable 65xx Assembler [20.01]
 
                              EM_BCS:
 00:050A' B017              :                  bcs    EM_BRA
-
-Portable 65xx Assembler [20.01]
-
 00:050C' 4C????            :                  jmp    SaveNone
 
                              EM_BEQ:
@@ -1490,6 +1480,9 @@ Portable 65xx Assembler [20.01]
 00:0511' 4C????            :                  jmp    SaveNone
 
                              EM_BMI:
+
+Portable 65xx Assembler [20.01]
+
 00:0514' 300D              :                  bmi    EM_BRA
 00:0516' 4C????            :                  jmp    SaveNone
 
@@ -1537,9 +1530,6 @@ Portable 65xx Assembler [20.01]
 00:054E' 4C????            :                  jmp    SaveNone
 
                              ;-------------------------------------------------------------------------------
-
-Portable 65xx Assembler [20.01]
-
 
                              EM_LDA:
 00:0551' B1F7              :                  lda    (ADDR_S),y
@@ -1547,6 +1537,9 @@ Portable 65xx Assembler [20.01]
 
                              EM_LDX:
 00:0556' B1F7              :                  lda    (ADDR_S),y
+
+Portable 65xx Assembler [20.01]
+
 00:0558' 85F1              :                  sta    X_REG
 00:055A' 4C????            :                  jmp    SaveP
 
@@ -1594,9 +1587,6 @@ Portable 65xx Assembler [20.01]
 
                              EM_PLA:
 00:058E' 68                :                  pla
-
-Portable 65xx Assembler [20.01]
-
 00:058F' 4C????            :                  jmp    SaveAP
 
                              EM_PLP:
@@ -1604,6 +1594,9 @@ Portable 65xx Assembler [20.01]
 00:0593' 0930              :                  ora    #$30
 00:0595' 85F3              :                  sta    P_REG
 00:0597' 4C????            :                  jmp    SaveNone
+
+Portable 65xx Assembler [20.01]
+
 
                              EM_PLX:
 00:059A' 68                :                  pla
@@ -1651,15 +1644,15 @@ Portable 65xx Assembler [20.01]
 00:05CF' 68                :                  pla
 00:05D0' 85F4              :                  sta    PC_REG+0
 00:05D2' 68                :                  pla
-
-Portable 65xx Assembler [20.01]
-
 00:05D3' 85F5              :                  sta    PC_REG+1
 00:05D5' E6F4              :                  inc    PC_REG+0
 00:05D7' D002              :                  if eq
 00:05D9' E6F5              :                   inc   PC_REG+1
                                               endif
 00:05DB' 4C????            :                  jmp    SaveNone
+
+
+Portable 65xx Assembler [20.01]
 
                              EM_STP:
 00:05DE' 4C????            :                  jmp    SaveNone
@@ -1708,9 +1701,6 @@ Portable 65xx Assembler [20.01]
 00:060E' 4A                :                  lsr    a
 00:060F' AA                :                  tax
 00:0610' BD????            :                  lda    BITS,x          ; Map to bit mask
-
-Portable 65xx Assembler [20.01]
-
 00:0613' 31F7              :                  and    (ADDR_S),y      ; And test value
 00:0615' D06B              :                  bne    SaveNone
 00:0617' 4C????            :                  jmp    EM_BRA
@@ -1718,6 +1708,9 @@ Portable 65xx Assembler [20.01]
                              EM_BBS:
 00:061A' 8A                :                  txa                    ; Get bit number
 00:061B' 2970              :                  and    #$70
+
+Portable 65xx Assembler [20.01]
+
 00:061D' 4A                :                  lsr    a
 00:061E' 4A                :                  lsr    a
 00:061F' 4A                :                  lsr    a
@@ -1765,9 +1758,6 @@ Portable 65xx Assembler [20.01]
 00:065B' 85F3              :                  sta    P_REG
 00:065D' 68                :                  pla
 00:065E' 49FF              :                  eor    #$ff
-
-Portable 65xx Assembler [20.01]
-
 00:0660' 31F7              :                  and    (ADDR_S),y
 00:0662' 91F7              :                  sta    (ADDR_S),y
 00:0664' 4C????            :                  jmp    SaveNone
@@ -1775,6 +1765,9 @@ Portable 65xx Assembler [20.01]
                              EM_TSB:
 00:0667' 48                :                  pha
 00:0668' 31F7              :                  and    (ADDR_S),Y
+
+Portable 65xx Assembler [20.01]
+
 00:066A' 08                :                  php
 00:066B' 68                :                  pla
 00:066C' 45F3              :                  eor    P_REG
@@ -1822,9 +1815,6 @@ Portable 65xx Assembler [20.01]
 00:069F' 20????            :                   jsr   SetStartAddr    ; Copy to start address
 00:06A2' 20????            :                   jsr   GetByte         ; Get the value
 00:06A5' B010              :                   if    cc
-
-Portable 65xx Assembler [20.01]
-
 00:06A7' A000              :                    ldy  #0              ; Write to memory
 00:06A9' A5FB              :                    lda  TEMP+0
 00:06AB' 91F7              :                    sta  (ADDR_S),Y
@@ -1832,6 +1822,9 @@ Portable 65xx Assembler [20.01]
 00:06AF' 20????            :                    jsr  BumpAddr
 00:06B2' A957              :                    lda  #'W'            ; Create prompt for next byte
 00:06B4' 4C????            :                    jmp  SetPrompt
+
+Portable 65xx Assembler [20.01]
+
                                                endif
                                               endif
 00:06B7' 4C????            :                  jmp    Error           ; Handle syntax errors
@@ -1879,9 +1872,6 @@ Portable 65xx Assembler [20.01]
                              CheckEnd:
 00:06E8' A5F8              :                 lda     ADDR_S+1
 00:06EA' C5FA              :                 cmp     ADDR_E+1
-
-Portable 65xx Assembler [20.01]
-
 00:06EC' 9006              :                 if      cs
 00:06EE' D004              :                  if     eq
 00:06F0' A5F7              :                   lda   ADDR_S+0
@@ -1889,6 +1879,9 @@ Portable 65xx Assembler [20.01]
                                               endif
                                              endif
 00:06F4' 60                :                 rts
+
+Portable 65xx Assembler [20.01]
+
 
                              ; Create a prompt string in the command buffer for the command in A using the
                              ; current value of the starting address.
@@ -1936,9 +1929,6 @@ Portable 65xx Assembler [20.01]
                              ; Get the next characater from the command buffer indicated by the X register
                              ; and convert it to UPPER case. If the carry is set then the end of the buffer
                              ; has been reached.
-
-Portable 65xx Assembler [20.01]
-
 
                              NextChar:
 00:0724' E4F6              :                 cpx     CMD_LEN         ; Reached end of buffer>
@@ -1946,6 +1936,9 @@ Portable 65xx Assembler [20.01]
 00:0728' A900              :                  lda    #0
 00:072A' 60                :                  rts                    ; Yes, return with C=1
                                              endif
+
+Portable 65xx Assembler [20.01]
+
 00:072B' BD0002            :                 lda     COMMAND,X       ; No, fetch a character
 00:072E' E8                :                 inx
 
@@ -1993,9 +1986,6 @@ Portable 65xx Assembler [20.01]
                                              .else
                            -                 ldy     #0
                            -                 sty     TEMP+0          ; Clear conversion area
-
-Portable 65xx Assembler [20.01]
-
                            -                 sty     TEMP+1
                                              .endif
 
@@ -2003,6 +1993,9 @@ Portable 65xx Assembler [20.01]
 00:0755' 20????            :                 jsr     GetNybble       ; And try to convert
 00:0758' 9001              :                 if      cs
 00:075A' 60                :                  rts                    ; Syntax error
+
+Portable 65xx Assembler [20.01]
+
                                              endif
                                              repeat
 00:075B' 06FB              :                  asl    TEMP+0          ; Fold into the result
@@ -2050,9 +2043,6 @@ Portable 65xx Assembler [20.01]
 00:0792' C930              :                  cmp    #'0'
 00:0794' 60                :                  rts
                                              endif
-
-Portable 65xx Assembler [20.01]
-
 00:0795' C947              :                 cmp     #'F'+1
 00:0797' B003              :                 if      cc
 00:0799' C941              :                  cmp    #'A'
@@ -2060,6 +2050,9 @@ Portable 65xx Assembler [20.01]
                                              endif
 00:079C' 18                :                 clc
 00:079D' 60                :                 rts
+
+Portable 65xx Assembler [20.01]
+
 
                              ; Return with the carry set of the character in A is not printable.
 
@@ -2107,9 +2100,6 @@ Portable 65xx Assembler [20.01]
 00:07D1' A02E              :                  ldy    #'.'
 00:07D3' BD????            :                  lda    BITS,x
 00:07D6' 24F3              :                  bit    P_REG
-
-Portable 65xx Assembler [20.01]
-
 00:07D8' F003              :                  if     ne
 00:07DA' BC????            :                   ldy   FLAG,x
                                               endif
@@ -2117,6 +2107,9 @@ Portable 65xx Assembler [20.01]
 00:07DE' 20????            :                  jsr    UartTx
 00:07E1' CA                :                  dex
 00:07E2' 10ED              :                 until mi
+
+Portable 65xx Assembler [20.01]
+
 
 00:07E4' A218              :                 ldx     #SP_STR         ; Display SP
 00:07E6' 20????            :                 jsr     ShowString
@@ -2164,15 +2157,15 @@ Portable 65xx Assembler [20.01]
 00:0823' C8                : .Skip:           iny
 00:0824' B1F7              :                  lda    (ADDR_S),y
 00:0826' 20????            :                  jsr    ShowHex2
-
-Portable 65xx Assembler [20.01]
-
 00:0829' 8003              :                 else
 00:082B' 20????            :                  jsr    Space2
                                              endif
 
 00:082E' C8                :                 iny                     ; Save the byte count
 00:082F' 84FD              :                 sty     COUNT
+
+
+Portable 65xx Assembler [20.01]
 
 00:0831' 20????            :                 jsr     Space
 00:0834' A000              :                 ldy     #0              ; Fetch the opcode
@@ -2221,9 +2214,6 @@ Portable 65xx Assembler [20.01]
 00:0879' 68                :                 pla                     ; Has an address?
 00:087A' 48                :                 pha
 00:087B' 2903              :                 and     #MB_ABS
-
-Portable 65xx Assembler [20.01]
-
 00:087D' F028              :                 if      ne
 00:087F' 48                :                  pha
 00:0880' C902              :                  cmp    #MB_IMM         ; Immediate?
@@ -2231,6 +2221,9 @@ Portable 65xx Assembler [20.01]
 00:0884' A923              :                   lda   #'#'
 00:0886' 20????            :                   jsr   UartTx
 00:0889' E8                :                   inx
+
+Portable 65xx Assembler [20.01]
+
                                               endif
 00:088A' A924              :                  lda    #'$'
 00:088C' 20????            :                  jsr    UartTx
@@ -2278,9 +2271,6 @@ Portable 65xx Assembler [20.01]
 00:08C9' C8                :                   iny
                                               endif
 
-
-Portable 65xx Assembler [20.01]
-
 00:08CA' 38                :                  sec                    ; Word out address of next
 00:08CB' 98                :                  tya                    ; .. instruction
 00:08CC' 65F7              :                  adc    ADDR_S+0
@@ -2288,6 +2278,9 @@ Portable 65xx Assembler [20.01]
 00:08D0' A900              :                  lda    #0
 00:08D2' 65F8              :                  adc    ADDR_S+1
 00:08D4' 85FC              :                  sta    TEMP+1
+
+Portable 65xx Assembler [20.01]
+
 
 00:08D6' 18                :                  clc                    ; Fetch offset
 00:08D7' B1F7              :                  lda    (ADDR_S),y      ; Work out lo byte
@@ -2335,9 +2328,6 @@ Portable 65xx Assembler [20.01]
 00:0913' A929              :                  lda    #')'
 00:0915' 20????            :                  jsr    UartTx
 00:0918' E8                :                  inx
-
-Portable 65xx Assembler [20.01]
-
                                              endif
 
 00:0919' 68                :                 pla
@@ -2345,6 +2335,9 @@ Portable 65xx Assembler [20.01]
 00:091C' F00C              :                 if      ne
 00:091E' A92C              :                  lda    #','
 00:0920' 20????            :                  jsr    UartTx
+
+Portable 65xx Assembler [20.01]
+
 00:0923' A959              :                  lda    #'Y'
 00:0925' 20????            :                  jsr    UartTx
 00:0928' E8                :                  inx
@@ -2392,9 +2385,6 @@ Portable 65xx Assembler [20.01]
 00:0952' 48                :                 pha                     ; Save a copy of the value
 00:0953' 4A                :                 lsr     a               ; Shift down the hi nybble
 00:0954' 4A                :                 lsr     a
-
-Portable 65xx Assembler [20.01]
-
 00:0955' 4A                :                 lsr     a
 00:0956' 4A                :                 lsr     a
 00:0957' 20????            :                 jsr     ShowHex         ; Convert and display
@@ -2402,6 +2392,9 @@ Portable 65xx Assembler [20.01]
 
                              ; Display the lo nybble of A as a hexadecimal digit. The values in A & Y are
                              ; destroyed.
+
+Portable 65xx Assembler [20.01]
+
 
                              ShowHex:
 00:095B' 20????            :                 jsr     ToHex           ; Convert to printable character
@@ -2449,9 +2442,6 @@ Portable 65xx Assembler [20.01]
                              ;-------------------------------------------------------------------------------
 
                              ; Output the string in the string table starting at the offset in X until a
-
-Portable 65xx Assembler [20.01]
-
                              ; null byte is reached.
 
                              ShowString:
@@ -2459,6 +2449,9 @@ Portable 65xx Assembler [20.01]
 00:0982' BD????            :                  lda    STRINGS,x       ; Fetch the next character
 00:0985' F006              :                  break  eq              ; Reached the end?
 00:0987' 20????            :                  jsr    UartTx          ; No, display it
+
+Portable 65xx Assembler [20.01]
+
 00:098A' E8                :                  inx                    ; Bump the index
 00:098B' 80F5              :                 forever
 00:098D' 60                :                 rts                     ; Done.
@@ -2506,9 +2499,6 @@ Portable 65xx Assembler [20.01]
                            - OPCODES:
                            -                 .byte   OP_BRK,OP_ORA,OP_ERR,OP_ERR,OP_ERR,OP_ORA,OP_ASL,OP_ERR ; 0
                            -                 .byte   OP_PHP,OP_ORA,OP_ASL,OP_ERR,OP_ERR,OP_ORA,OP_ASL,OP_ERR
-
-Portable 65xx Assembler [20.01]
-
                            -                 .byte   OP_BPL,OP_ORA,OP_ERR,OP_ERR,OP_ERR,OP_ORA,OP_ASL,OP_ERR ; 1
                            -                 .byte   OP_CLC,OP_ORA,OP_INC,OP_ERR,OP_ERR,OP_ORA,OP_ASL,OP_ERR
                            -                 .byte   OP_JSR,OP_AND,OP_ERR,OP_ERR,OP_BIT,OP_AND,OP_ROL,OP_ERR ; 2
@@ -2516,6 +2506,9 @@ Portable 65xx Assembler [20.01]
                            -                 .byte   OP_BMI,OP_AND,OP_ERR,OP_ERR,OP_BIT,OP_AND,OP_ROL,OP_ERR ; 3
                            -                 .byte   OP_SEC,OP_AND,OP_DEC,OP_ERR,OP_BIT,OP_AND,OP_ROL,OP_ERR
                            -                 .byte   OP_RTI,OP_EOR,OP_ERR,OP_ERR,OP_ERR,OP_EOR,OP_LSR,OP_ERR ; 4
+
+Portable 65xx Assembler [20.01]
+
                            -                 .byte   OP_PHA,OP_EOR,OP_LSR,OP_ERR,OP_JMP,OP_EOR,OP_LSR,OP_ERR
                            -                 .byte   OP_BVC,OP_EOR,OP_ERR,OP_ERR,OP_ERR,OP_EOR,OP_LSR,OP_ERR ; 5
                            -                 .byte   OP_CLI,OP_EOR,OP_ERR,OP_ERR,OP_ERR,OP_EOR,OP_LSR,OP_ERR
@@ -2563,9 +2556,6 @@ Portable 65xx Assembler [20.01]
                            -                 .byte   MO_IMP,MO_ABY,MO_IMP,MO_IMP,MO_IMP,MO_ABX,MO_IMP,MO_IMP
                            -                 .byte   MO_IMM,MO_IZX,MO_IMM,MO_IMP,MO_ZPG,MO_ZPG,MO_ZPG,MO_IMP ; A
                            -                 .byte   MO_IMP,MO_IMM,MO_IMP,MO_IMP,MO_ABS,MO_ABS,MO_ABS,MO_IMP
-
-Portable 65xx Assembler [20.01]
-
                            -                 .byte   MO_REL,MO_IZY,MO_IMP,MO_IMP,MO_ZPX,MO_ZPX,MO_ZPY,MO_IMP ; B
                            -                 .byte   MO_IMP,MO_ABY,MO_IMP,MO_IMP,MO_ABX,MO_ABX,MO_ABY,MO_IMP
                            -                 .byte   MO_IMM,MO_IZX,MO_IMP,MO_IMP,MO_ZPG,MO_ZPG,MO_ZPG,MO_IMP ; C
@@ -2573,6 +2563,9 @@ Portable 65xx Assembler [20.01]
                            -                 .byte   MO_REL,MO_IZY,MO_IMP,MO_IMP,MO_IMP,MO_ZPX,MO_ZPX,MO_IMP ; D
                            -                 .byte   MO_IMP,MO_ABY,MO_IMP,MO_IMP,MO_IMP,MO_ABX,MO_ABX,MO_IMP
                            -                 .byte   MO_IMM,MO_IZX,MO_IMP,MO_IMP,MO_ZPG,MO_ZPG,MO_ZPG,MO_IMP ; E
+
+Portable 65xx Assembler [20.01]
+
                            -                 .byte   MO_IMP,MO_IMM,MO_IMP,MO_IMP,MO_ABS,MO_ABS,MO_ABS,MO_IMP
                            -                 .byte   MO_REL,MO_IZY,MO_IMP,MO_IMP,MO_IMP,MO_ZPX,MO_ZPX,MO_IMP ; F
                            -                 .byte   MO_IMP,MO_ABY,MO_IMP,MO_IMP,MO_IMP,MO_ABX,MO_ABX,MO_IMP
@@ -2620,9 +2613,6 @@ Portable 65xx Assembler [20.01]
 00:0C08' 0002100003030361  :                 .byte   MO_IMP,MO_IMM,MO_ACC,MO_IMP,MO_ABS,MO_ABS,MO_ABS,MO_BRL
 00:0C10' 4085810001090901  :                 .byte   MO_REL,MO_IZY,MO_IZP,MO_IMP,MO_ZPG,MO_ZPX,MO_ZPX,MO_ZPG ; 1
 00:0C18' 00071000030B0B61  :                 .byte   MO_IMP,MO_ABY,MO_ACC,MO_IMP,MO_ABS,MO_ABX,MO_ABX,MO_BRL
-
-Portable 65xx Assembler [20.01]
-
 00:0C20' 0389000001010101  :                 .byte   MO_ABS,MO_IZX,MO_IMP,MO_IMP,MO_ZPG,MO_ZPG,MO_ZPG,MO_ZPG ; 2
 00:0C28' 0002100003030361  :                 .byte   MO_IMP,MO_IMM,MO_ACC,MO_IMP,MO_ABS,MO_ABS,MO_ABS,MO_BRL
 00:0C30' 4085810009090901  :                 .byte   MO_REL,MO_IZY,MO_IZP,MO_IMP,MO_ZPX,MO_ZPX,MO_ZPX,MO_ZPG ; 3
@@ -2630,6 +2620,9 @@ Portable 65xx Assembler [20.01]
 00:0C40' 0089000000010101  :                 .byte   MO_IMP,MO_IZX,MO_IMP,MO_IMP,MO_IMP,MO_ZPG,MO_ZPG,MO_ZPG ; 4
 00:0C48' 0002100003030361  :                 .byte   MO_IMP,MO_IMM,MO_ACC,MO_IMP,MO_ABS,MO_ABS,MO_ABS,MO_BRL
 00:0C50' 4085810000090901  :                 .byte   MO_REL,MO_IZY,MO_IZP,MO_IMP,MO_IMP,MO_ZPX,MO_ZPX,MO_ZPG ; 5
+
+Portable 65xx Assembler [20.01]
+
 00:0C58' 00070000000B0B61  :                 .byte   MO_IMP,MO_ABY,MO_IMP,MO_IMP,MO_IMP,MO_ABX,MO_ABX,MO_BRL
 00:0C60' 0089000001010101  :                 .byte   MO_IMP,MO_IZX,MO_IMP,MO_IMP,MO_ZPG,MO_ZPG,MO_ZPG,MO_ZPG ; 6
 00:0C68' 0002100083030361  :                 .byte   MO_IMP,MO_IMM,MO_ACC,MO_IMP,MO_IAB,MO_ABS,MO_ABS,MO_BRL
@@ -2677,9 +2670,6 @@ Portable 65xx Assembler [20.01]
                            -                 .byte   OP_DEY,OP_BIT,OP_TXA,OP_ERR,OP_STY,OP_STA,OP_STX,OP_NOP
                            -                 .byte   OP_BCC,OP_STA,OP_STA,OP_ERR,OP_STY,OP_STA,OP_STX,OP_NOP ; 9
                            -                 .byte   OP_TYA,OP_STA,OP_TXS,OP_ERR,OP_STZ,OP_STA,OP_STZ,OP_NOP
-
-Portable 65xx Assembler [20.01]
-
                            -                 .byte   OP_LDY,OP_LDA,OP_LDX,OP_ERR,OP_LDY,OP_LDA,OP_LDX,OP_NOP ; A
                            -                 .byte   OP_TAY,OP_LDA,OP_TAX,OP_ERR,OP_LDY,OP_LDA,OP_LDX,OP_NOP
                            -                 .byte   OP_BCS,OP_LDA,OP_LDA,OP_ERR,OP_LDY,OP_LDA,OP_LDX,OP_NOP ; B
@@ -2687,6 +2677,9 @@ Portable 65xx Assembler [20.01]
                            -                 .byte   OP_CPY,OP_CMP,OP_ERR,OP_ERR,OP_CPY,OP_CMP,OP_DEC,OP_NOP ; C
                            -                 .byte   OP_INY,OP_CMP,OP_DEX,OP_WAI,OP_CPY,OP_CMP,OP_DEC,OP_NOP
                            -                 .byte   OP_BNE,OP_CMP,OP_CMP,OP_ERR,OP_ERR,OP_CMP,OP_DEC,OP_NOP ; D
+
+Portable 65xx Assembler [20.01]
+
                            -                 .byte   OP_CLD,OP_CMP,OP_PHX,OP_STP,OP_ERR,OP_CMP,OP_DEC,OP_NOP
                            -                 .byte   OP_CPX,OP_SBC,OP_ERR,OP_ERR,OP_CPX,OP_SBC,OP_INC,OP_NOP ; E
                            -                 .byte   OP_INX,OP_SBC,OP_NOP,OP_ERR,OP_CPX,OP_SBC,OP_INC,OP_NOP
@@ -2734,9 +2727,6 @@ Portable 65xx Assembler [20.01]
 
                              ; Handle interrupts.
 
-
-Portable 65xx Assembler [20.01]
-
                              IRQ:
 00:0D00' 48                :                 pha                     ; Save users registers
 00:0D01' DA                :                 phx
@@ -2744,6 +2734,9 @@ Portable 65xx Assembler [20.01]
 00:0D02' BA                :                 tsx                     ; Check for BRK
 00:0D03' BD0301            :                 lda     STACK+3,X
 00:0D06' 2910              :                 and     #$10
+
+Portable 65xx Assembler [20.01]
+
 00:0D08' F004              :                 if      ne
 00:0D0A' 5A                :                  phy
 00:0D0B' 4C????            :                  jmp    BRK             ; Enter monitor with registers on stack
@@ -2763,10 +2756,6 @@ Portable 65xx Assembler [20.01]
                              UartTx:
 00:0D11' 48                :                 pha
 00:0D12' DA                :                 phx
-                             ;       jsr $84f0
-                             ;       plx
-                             ;       pla
-                             ;       rts
 00:0D13' AA                :                 tax
 
 00:0D14' A901              :                 lda     #$01
@@ -2790,12 +2779,6 @@ Portable 65xx Assembler [20.01]
 
                              UartRx:
 00:0D30' DA                :                 phx                     ; Save callers X
-                             ;       jsr $84cb
-
-Portable 65xx Assembler [20.01]
-
-                             ;       plx
-                             ;       rts
 
 00:0D31' A902              :                 lda     #$02            ; Wait until data in buffer
 00:0D33' 2CE07F            : RxWait:         bit     VIA2_IRB
@@ -2808,6 +2791,9 @@ Portable 65xx Assembler [20.01]
 00:0D43' EA                :                 nop                     ; Wait for data to be available
 00:0D44' EA                :                 nop
 00:0D45' EA                :                 nop
+
+Portable 65xx Assembler [20.01]
+
 00:0D46' EA                :                 nop
 00:0D47' AEE17F            :                 ldx     VIA2_IRA        ; Read it
 00:0D4A' 0CE07F            :                 tsb     VIA2_ORB        ; And end the strobe
