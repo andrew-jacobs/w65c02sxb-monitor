@@ -1,0 +1,1 @@
+call ..\..\sxb.bat load monitor.s28 exec $7000 term

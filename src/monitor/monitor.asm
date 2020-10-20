@@ -215,9 +215,8 @@ COUNT		.space	1
 
 ;-------------------------------------------------------------------------------
 
-		.org	$00fe
-
-IO_TEMP		.space	1
+IRQV		.equ	$7e70		; Vectors
+NMIV		.equ	$7e72
 
 ;===============================================================================
 ; UART Buffers
@@ -225,9 +224,6 @@ IO_TEMP		.space	1
 
 		.bss
 		.org	$0200
-
-IRQV		.space	2		; Vectors
-NMIV		.space	2
 
 CMD_SIZE	.equ	128
 
@@ -238,6 +234,8 @@ COMMAND		.space	CMD_SIZE	; Command buffer area
 ;-------------------------------------------------------------------------------
 
 		.code
+		
+		jmp	RESET
 
 MNEMONICS:
 		MNEM    '?','?','?'
@@ -320,7 +318,7 @@ RESET:
 		sei
 		cld			; Ensure binary mode
 
-		ldx	#$FF		; Reset the stack
+		ldx	#$ff		; Reset the stack
 		txs
 
 		repeat			; Setup vectors
@@ -330,17 +328,17 @@ RESET:
 		 cpx	#4
 		until eq
 
+         ;       lda     #$1c            ; Configure VIA for USB FIFO
+        ;        sta     VIA2_DDRB
+       ;         lda     #$18
+        ;        sta     VIA2_ORB
 
-                lda     #$1c            ; Configure VIA for USB FIFO
-                sta     VIA2_DDRB
-                lda     #$18
-                sta     VIA2_ORB
-
-		cli			; Allow interrupts
+	;	cli			; Allow interrupts
 
 		jsr	NewLine
 		ldx	#TTL_STR
 		jsr	ShowString
+		jsr	NewLine
 
 		repeat
 		 brk	#0		; And enter monitor
@@ -372,7 +370,7 @@ BRK:
 		sbc	#0
 		sta	PC_REG+1
 
-		cli			; Allow interrupts
+	;	cli			; Allow interrupts
 
 ;===============================================================================
 ; Show Registers
@@ -1965,7 +1963,6 @@ ExtractLetter:
 		ror	a
 		rts
 
-
 ;===============================================================================
 ; Display Utilities
 ;-------------------------------------------------------------------------------
@@ -2044,17 +2041,8 @@ ShowString:
 
 STRINGS:
 TTL_STR		.equ	.-STRINGS
-		.byte	CR,LF,"SB-"
-		.if	__6502__
-		.byte	"6502"
-		.endif
-		.if	__65C02__
-		.byte	"65C02"
-		.endif
-		.if	__65SC02__
-		.byte	"65SC02"
-		.endif
-		.byte	" [20.03]",0
+		.byte	CR,LF,"W65C02SXB"
+		.byte	" [20.10]",0
 PC_STR		.equ	.-STRINGS
 		.byte	"PC=",0
 SP_STR		.equ	.-STRINGS
@@ -2312,35 +2300,17 @@ MODES:
 
 IRQ:
 		pha			; Save users registers
-		.if	__65C02__|__65SC02__
 		phx
-		phy
-		.else
-		txa
-		pha
-		tya
-		pha
-		cld
-		.endif
-
+		
 		tsx			; Check for BRK
-		lda	STACK+4,X
+		lda	STACK+3,X
 		and	#$10
 		if 	ne
+		 phy
 		 jmp	BRK		; Enter monitor with registers on stack
 		endif
 
-;-------------------------------------------------------------------------------
-
-		.if	__65C02__|__65SC02__
-		ply			; Restore user registers
 		plx
-		.else
-		pla			; Restore user registers
-		tay
-		pla
-		tax
-		.endif
 		pla
 NMI:		rti			; Done
 
@@ -2352,28 +2322,28 @@ NMI:		rti			; Done
 ; wait until some space is available. Registers are preserved.
 
 UartTx:
+		pha
                 phx
-                ldx     #$00            ; Make data port all input
-                stx     VIA2_DDRA
-                sta     VIA2_ORA        ; Save the output character
-                lda     #%01
+;	jsr $84f0
+;	plx
+;	pla
+;	rts
+		tax
+		
+                lda     #$01
 TxWait:         bit     VIA2_IRB        ; Is there space for more data
                 bne     TxWait
-
-                lda     VIA2_IRB        ; Strobe WR
-                and     #$fb
-                tax
-                ora     #$04
-                sta     VIA2_ORB
-                lda     #$ff            ; Make data port all output
-                sta     VIA2_DDRA
+		
+		lda	#$ff		; Make port an output
+		sta	VIA2_DDRA
+		stx	VIA2_ORA	; And output the character
+                lda     #$04        	; Strobe WR high
+		tsb	VIA2_ORB
                 nop
                 nop
-                stx     VIA2_ORB        ; End strobe
-                lda     VIA2_IRA
-                ldx     #$00            ; Make data port all output
-                stx     VIA2_DDRA
+		trb	VIA2_ORB
                 plx
+		pla
 		rts			; Done
 
 ; Extracts the next character from the head of the RX buffer. If the buffer is
@@ -2381,21 +2351,25 @@ TxWait:         bit     VIA2_IRB        ; Is there space for more data
 
 UartRx:
                 phx                     ; Save callers X
+;	jsr $84cb
+;	plx
+;	rts
+		
                 lda     #$02            ; Wait until data in buffer
 RxWait:         bit     VIA2_IRB
                 bne     RxWait
 
-                lda     VIA2_IRB        ; Strobe /RD low
-                ora     #$08
-                tax
-                and     #$f7
-                sta     VIA2_ORB
-                nop                     ; Wait for data to be available
-                nop
-                nop
-                nop
-                lda     VIA2_IRA        ; Read it
-                stx     VIA2_ORB        ; And end the strobe
+		stz	VIA2_DDRA	; Make port all input
+                lda     VIA2_IRB
+                lda     #$08        	; Strobe /RD low
+		trb	VIA2_ORB
+		nop			; Wait for data to be available
+		nop
+		nop
+		nop
+		ldx	VIA2_IRA        ; Read it
+                tsb     VIA2_ORB	; And end the strobe
+		txa
                 plx                     ; .. and callers X
 		rts			; Done
 

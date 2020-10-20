@@ -5,7 +5,6 @@ Global Symbol Map
 Sections:
 
 .page0           : 000000F0 - 000000FD in monitor.obj
-                   000000FE - 000000FE in monitor.obj
-.bss             : 00000200 - 00000283 in monitor.obj
-.code            : 00007000 - 00007D65 in monitor.obj
+.bss             : 00000200 - 0000027F in monitor.obj
+.code            : 00007000 - 00007D55 in monitor.obj
                    00007EFA - 00007EFF in monitor.obj

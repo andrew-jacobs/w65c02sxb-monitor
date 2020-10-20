@@ -1,1 +1,1 @@
-..\..\sxb -port COM9 %*
+..\..\sxb -port COM6 %*
