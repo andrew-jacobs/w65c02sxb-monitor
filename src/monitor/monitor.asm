@@ -415,6 +415,8 @@ RptCommand:
 
 		 cmp	#CR		; End of input?
 		 break eq
+		 cmp	#LF		; Ignore LF
+		 continue eq
 
 		 cmp 	#ESC		; Cancel input?
 		 if 	eq
