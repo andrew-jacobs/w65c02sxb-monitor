@@ -1,1 +1,1 @@
-call ..\..\sxb.bat load monitor.s28 exec $7000 term
+call ..\..\sxb.bat loadbin monitor.bin exec $7000 term
