@@ -17,13 +17,64 @@ Clone or download the repository to your machine then perform the following step
 ```
 ..\..\sxb -port COM6 %*
 ```
-You can run the sxb program with the option ports to get a list
+You can run the sxb program with the option ports to get a list.
 ```
 D:\OpenSource\65xx\w65c02sxb-monitor>sxb ports
 COM6
 
 D:\OpenSource\65xx\w65c02sxb-monitor>
 ```
+2. Move the monitor source folder (src/monitor) and open a terminal.
+- In Windows type 'make' to run the batch file that assembles and links the code.
+- In Linux/MacOs type 'sh -f make.sh' to run the shell script.
+
+The assembler will complain about BRK being used as a label but the linker will produce a 'monitor.bin' file. The console transcript should look like this ...
+```
+D:\OpenSource\65xx\w65c02sxb-monitor\src\monitor>make
+
+D:\OpenSource\65xx\w65c02sxb-monitor\src\monitor>java -cp ..\..\Dev65.jar uk.co.demon.obelisk.w65xx.As65 -include ..\..\include monitor.asm
+Warning: monitor.asm (356) This label is a reserved word (BRK)
+
+D:\OpenSource\65xx\w65c02sxb-monitor\src\monitor>if errorlevel 1 goto done
+
+D:\OpenSource\65xx\w65c02sxb-monitor\src\monitor>java -cp ..\..\Dev65.jar uk.co.demon.obelisk.w65xx.Lk65 -code 7000-7eff -bss 0200-27ff -wdc -output monitor.bin monitor.obj
+
+D:\OpenSource\65xx\w65c02sxb-monitor\src\monitor>if errorlevel 1 pause
+
+D:\OpenSource\65xx\w65c02sxb-monitor\src\monitor>
+```
+or ...
+```
+andrew@virtual-ubuntu:~/Code/w65c02sxb-monitor/src/monitor$ sh -f make.sh
+Warning: monitor.asm (356) This label is a reserved word (BRK)
+andrew@virtual-ubuntu:~/Code/w65c02sxb-monitor/src/monitor$ 
+```
+3. Press the reset button on your SXB to make sure its boot firmware is running then:
+- On Windows run the 'run.bat' file to download and start the monitor.
+- On Linux/MacOS type 'sh -f run.sh' to start the process. The downloader may ask you to pick a serial port if your system has more than one.
+The command transcript for this should be similar to ...
+```
+D:\OpenSource\65xx\w65c02sxb-monitor\src\monitor>run
+
+D:\OpenSource\65xx\w65c02sxb-monitor\src\monitor>call ..\..\sxb.bat loadbin monitor.bin exec $7000 term
+
+D:\OpenSource\65xx\w65c02sxb-monitor\src\monitor>..\..\sxb -port COM6 loadbin monitor.bin exec $7000 term
+Loaded 3840 ($0F00) bytes
+Terminal (ALT-X to exit):
+
+
+
+W65C02SXB [20.10]
+
+PC=70AC A=0A X=13 Y=00 P=.V11.I.C SP=FF
+.
+```
+or ...
+```
+Lunix/MacOS transcript
+```
+
+
 
 
 # SXB Memory Usage
