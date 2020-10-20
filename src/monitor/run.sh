@@ -1,2 +1,2 @@
 #! /bin/sh
-sh -f ../../sxb.sh -m execute monitor.s28 -t 
+sh -f ../../sxb.sh monitor.bin -x 7000

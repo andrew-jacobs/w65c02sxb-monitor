@@ -371,7 +371,7 @@ if __name__ == '__main__':
 	if args.execute is not None:
 		key = 'execute'
 		blocks[key] = {}
-		blocks[key]['Address'] = ['00','3F','00']
+		blocks[key]['Address'] = ['00','7E','00']
 		blocks[key]['Length'] = ['10','00']
 		if len(args.execute) == 4:
 			blocks[key]['Data'] = ['00','00','00','00','00','00', args.execute[2:],args.execute[:2],'00','00','00','00','34','FF','00','00']
