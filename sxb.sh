@@ -1,3 +1,7 @@
 #! /bin/sh
-python2 ../../uploader.py -d /dev/ttyUSB0 -b 115200 $* && \
-python2 ../../minterm.py /dev/ttyUSB0 115200 --rtscts
+
+PORT=/dev/ttyUSB0
+BAUD=115200
+
+python2 ../../uploader.py -d $PORT -b $BAUD -t 02 $*
+python2 ../../miniterm.py $PORT $BAUD --xonxoff
