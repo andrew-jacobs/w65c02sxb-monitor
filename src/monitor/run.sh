@@ -1,2 +1,2 @@
 #! /bin/sh
-sh -f ../../sxb.sh monitor.bin -x 7000
+sh -f ../../sxb.sh loadbin monitor.bin exec 7000 term
