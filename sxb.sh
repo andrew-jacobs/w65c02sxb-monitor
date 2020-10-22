@@ -1,7 +1,2 @@
 #! /bin/sh
-
-PORT=/dev/ttyUSB0
-BAUD=115200
-
-python2 ../../uploader.py -d $PORT -b $BAUD -t 02 $*
-python2 ../../miniterm.py $PORT $BAUD --xonxoff
+java -cp "../../dev65.jar;../../jSerialComm-2.6.2.jar" uk.me.obelisk.sxb.Uploader -port /dev/ttyUSB0 $*
