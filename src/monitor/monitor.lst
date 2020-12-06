@@ -31,6 +31,12 @@ Portable 65xx Assembler [20.01]
 
                                              .include "w65c02sxb.inc"
                              ;===============================================================================
+                             ; __        ____  ____   ____ ___ ____  ______  ______
+                             ; \ \      / / /_| ___| / ___/ _ \___ \/ ___\ \/ / __ )
+                             ;  \ \ /\ / / '_ \___ \| |  | | | |__) \___ \\  /|  _ \
+                             ;   \ V  V /| (_) |__) | |__| |_| / __/ ___) /  \| |_) |
+                             ;    \_/\_/  \___/____/ \____\___/_____|____/_/\_\____/
+                             ;
                              ; WDC W65C02SXB System Definitions
                              ;-------------------------------------------------------------------------------
                              ; Copyright (C)2020 Andrew Jacobs.
@@ -49,15 +55,15 @@ Portable 65xx Assembler [20.01]
 
                                              .include "w65c02.inc"
                              ;===============================================================================
+
+Portable 65xx Assembler [20.01]
+
                              ; WDC W65C02 Processor Definitions
                              ;-------------------------------------------------------------------------------
                              ; Copyright (C)2020 Andrew Jacobs.
                              ; All rights reserved.
                              ;
                              ; This work is made available under the terms of the Creative Commons
-
-Portable 65xx Assembler [20.01]
-
                              ; Attribution-ShareAlike 4.0 International license. Open the following URL to
                              ; see the details.
                              ;
@@ -87,8 +93,73 @@ Portable 65xx Assembler [20.01]
                              ; Hardware Stack Page
 
          00000100          = STACK           .equ    $0100
+                                             .include "w65c21.inc"
+                             ;===============================================================================
+                             ; __        ____  ____   ____ ____  _
+                             ; \ \      / / /_| ___| / ___|___ \/ |
+                             ;  \ \ /\ / / '_ \___ \| |     __) | |
+                             ;   \ V  V /| (_) |__) | |___ / __/| |
+                             ;    \_/\_/  \___/____/ \____|_____|_|
+                             ;
+                             ; WDC W65C21 Peripheral Interface Adapter (PIA) Definitions
+                             ;-------------------------------------------------------------------------------
+                             ; Copyright (C)2020 Andrew Jacobs.
+                             ; All rights reserved.
+                             ;
+                             ; This work is made available under the terms of the Creative Commons
+                             ; Attribution-ShareAlike 4.0 International license. Open the following URL to
+                             ; see the details.
+                             ;
+                             ; https://creativecommons.org/licenses/by-sa/4.0/
+                             ;
+
+Portable 65xx Assembler [20.01]
+
+                             ;===============================================================================
+                             ; Notes:
+                             ;
+                             ;-------------------------------------------------------------------------------
+
+                             ;===============================================================================
+                             ; Peripheral Registers
+                             ;-------------------------------------------------------------------------------
+
+         00000000          = PIA_ORA         .equ    0               ; When CRA.DDRA = 1
+         00000000          = PIA_DDRA        .equ    0               ; When CRA.DDRA = 0
+         00000001          = PIA_CRA         .equ    1
+         00000002          = PIA_ORB         .equ    2               ; When CRB.DDRB = 1
+         00000002          = PIA_DDRB        .equ    2               ; When CRB.DDRB = 0
+         00000003          = PIA_CRB         .equ    3
+
+                             ; CRA Register Bits
+
+         00000080          = PIA_CRA_IRQA1   .equ    $80
+         00000040          = PIA_CRA_IRQA2   .equ    $40
+         00000020          = PIA_CRA_CA22    .equ    $20
+         00000010          = PIA_CRA_CA21    .equ    $10
+         00000008          = PIA_CRA_CA20    .equ    $08
+         00000004          = PIA_CRA_DDRA    .equ    $04
+         00000002          = PIA_CRA_CA11    .equ    $02
+         00000001          = PIA_CRA_CA10    .equ    $01
+
+                             ; CRB Register Bits
+
+         00000080          = PIA_CRB_IRQB1   .equ    $80
+         00000040          = PIA_CRB_IRQB2   .equ    $40
+         00000020          = PIA_CRB_CB22    .equ    $20
+         00000010          = PIA_CRB_CB21    .equ    $10
+         00000008          = PIA_CRB_CB20    .equ    $08
+         00000004          = PIA_CRB_DDRB    .equ    $04
+         00000002          = PIA_CRB_CB11    .equ    $02
+         00000001          = PIA_CRB_CB10    .equ    $01
                                              .include "w65c22.inc"
                              ;===============================================================================
+                             ; __        ____  ____   ____ ____  ____
+                             ; \ \      / / /_| ___| / ___|___ \|___ \
+                             ;  \ \ /\ / / '_ \___ \| |     __) | __) |
+                             ;   \ V  V /| (_) |__) | |___ / __/ / __/
+                             ;    \_/\_/  \___/____/ \____|_____|_____|
+                             ;
                              ; WDC W65C22 Versatile Interface Adapter (VIA) Definitions
                              ;-------------------------------------------------------------------------------
                              ; Copyright (C)2020 Andrew Jacobs.
@@ -98,6 +169,9 @@ Portable 65xx Assembler [20.01]
                              ; Attribution-ShareAlike 4.0 International license. Open the following URL to
                              ; see the details.
                              ;
+
+Portable 65xx Assembler [20.01]
+
                              ; https://creativecommons.org/licenses/by-sa/4.0/
                              ;
                              ;===============================================================================
@@ -112,9 +186,6 @@ Portable 65xx Assembler [20.01]
          00000000          = VIA_ORB         .equ    $00
          00000000          = VIA_IRB         .equ    $00
          00000001          = VIA_ORA         .equ    $01
-
-Portable 65xx Assembler [20.01]
-
          00000001          = VIA_IRA         .equ    $01
          00000002          = VIA_DDRB        .equ    $02
          00000003          = VIA_DDRA        .equ    $03
@@ -155,6 +226,9 @@ Portable 65xx Assembler [20.01]
          00000001          = VIA_PCR_CA1C    .equ    $01
 
                              ; IFR Register Bits
+
+Portable 65xx Assembler [20.01]
+
 
          00000080          = VIA_IFR_IRQ     .equ    $80
          00000040          = VIA_IFR_T1      .equ    $40
@@ -169,9 +243,6 @@ Portable 65xx Assembler [20.01]
 
          00000080          = VIA_IER_SET     .equ    $80
          00000040          = VIA_IER_T1      .equ    $40
-
-Portable 65xx Assembler [20.01]
-
          00000020          = VIA_IER_T2      .equ    $20
          00000010          = VIA_IER_CB1     .equ    $10
          00000008          = VIA_IER_CB2     .equ    $08
@@ -212,6 +283,9 @@ Portable 65xx Assembler [20.01]
          00000020          = ACIA_SR_DCDB    .equ    1<<5            ; Data Carrier Detect (0=Detected)
          00000010          = ACIA_SR_TDRE    .equ    1<<4            ; Tranmitter Data Register Empty
          00000008          = ACIA_SR_RDRF    .equ    1<<3            ; Receiver Data Register Full
+
+Portable 65xx Assembler [20.01]
+
          00000004          = ACIA_SR_OVRN    .equ    1<<2            ; Overrun
          00000002          = ACIA_SR_FE      .equ    1<<1            ; Framing Error
          00000001          = ACIA_SR_PE      .equ    1<<0            ; Parity Error
@@ -226,9 +300,6 @@ Portable 65xx Assembler [20.01]
          00000001          = ACIA_CMD_DTR    .equ    1<<0
 
          00000080          = ACIA_CR_SBN     .equ    1<<7
-
-Portable 65xx Assembler [20.01]
-
          00000040          = ACIA_CR_WL1     .equ    1<<6
          00000020          = ACIA_CR_WL0     .equ    1<<5
          00000010          = ACIA_CR_RCS     .equ    1<<4
@@ -247,10 +318,45 @@ Portable 65xx Assembler [20.01]
                              ; Peripherals
                              ;-------------------------------------------------------------------------------
 
-         00007F80          = ACIA            .equ    $7f80
-         00007FA0          = PIA             .equ    $7fa0
+         00007F80          = ACIA1           .equ    $7f80
+         00007FA0          = PIA1            .equ    $7fa0
          00007FC0          = VIA1            .equ    $7fc0
          00007FE0          = VIA2            .equ    $7fe0           ; Connected to FTDI 245
+
+         00007F80          = ACIA1_DATA      .equ    ACIA1+ACIA_DATA
+         00007F81          = ACIA1_SR        .equ    ACIA1+ACIA_SR
+         00007F82          = ACIA1_CMD       .equ    ACIA1+ACIA_CMD
+         00007F83          = ACIA1_CR        .equ    ACIA1+ACIA_CR
+
+         00007FA0          = PIA1_ORA        .equ    PIA1+PIA_ORA
+         00007FA0          = PIA1_DDRA       .equ    PIA1+PIA_DDRA
+         00007FA1          = PIA1_CRA        .equ    PIA1+PIA_CRA
+         00007FA2          = PIA1_ORB        .equ    PIA1+PIA_ORB
+         00007FA2          = PIA1_DDRB       .equ    PIA1+PIA_DDRB
+         00007FA3          = PIA1_CRB        .equ    PIA1+PIA_CRB
+
+         00007FC0          = VIA1_IRB        .equ    VIA1+VIA_IRB
+         00007FC0          = VIA1_ORB        .equ    VIA1+VIA_ORB
+         00007FC1          = VIA1_ORA        .equ    VIA1+VIA_ORA
+         00007FC1          = VIA1_IRA        .equ    VIA1+VIA_IRA
+         00007FC2          = VIA1_DDRB       .equ    VIA1+VIA_DDRB
+
+Portable 65xx Assembler [20.01]
+
+         00007FC3          = VIA1_DDRA       .equ    VIA1+VIA_DDRA
+         00007FC4          = VIA1_T1CL       .equ    VIA1+VIA_T1CL
+         00007FC5          = VIA1_T1CH       .equ    VIA1+VIA_T1CH
+         00007FC6          = VIA1_T1LL       .equ    VIA1+VIA_T1LL
+         00007FC7          = VIA1_T1LH       .equ    VIA1+VIA_T1LH
+         00007FC8          = VIA1_T2CL       .equ    VIA1+VIA_T2CL
+         00007FC9          = VIA1_T2CH       .equ    VIA1+VIA_T2CH
+         00007FCA          = VIA1_SR         .equ    VIA1+VIA_SR
+         00007FCB          = VIA1_ACR        .equ    VIA1+VIA_ACR
+         00007FCC          = VIA1_PCR        .equ    VIA1+VIA_PCR
+         00007FCD          = VIA1_IFR        .equ    VIA1+VIA_IFR
+         00007FCE          = VIA1_IER        .equ    VIA1+VIA_IER
+         00007FCF          = VIA1_ORAN       .equ    VIA1+VIA_ORAN
+         00007FCF          = VIA1_IRAN       .equ    VIA1+VIA_IRAN
 
          00007FE0          = VIA2_IRB        .equ    VIA2+VIA_IRB
          00007FE0          = VIA2_ORB        .equ    VIA2+VIA_ORB
@@ -258,11 +364,19 @@ Portable 65xx Assembler [20.01]
          00007FE1          = VIA2_IRA        .equ    VIA2+VIA_IRA
          00007FE2          = VIA2_DDRB       .equ    VIA2+VIA_DDRB
          00007FE3          = VIA2_DDRA       .equ    VIA2+VIA_DDRA
-
-                             ;===============================================================================
-                             ; Utility Routines
-                             ;-------------------------------------------------------------------------------
-
+         00007FE4          = VIA2_T1CL       .equ    VIA2+VIA_T1CL
+         00007FE5          = VIA2_T1CH       .equ    VIA2+VIA_T1CH
+         00007FE6          = VIA2_T1LL       .equ    VIA2+VIA_T1LL
+         00007FE7          = VIA2_T1LH       .equ    VIA2+VIA_T1LH
+         00007FE8          = VIA2_T2CL       .equ    VIA2+VIA_T2CL
+         00007FE9          = VIA2_T2CH       .equ    VIA2+VIA_T2CH
+         00007FEA          = VIA2_SR         .equ    VIA2+VIA_SR
+         00007FEB          = VIA2_ACR        .equ    VIA2+VIA_ACR
+         00007FEC          = VIA2_PCR        .equ    VIA2+VIA_PCR
+         00007FED          = VIA2_IFR        .equ    VIA2+VIA_IFR
+         00007FEE          = VIA2_IER        .equ    VIA2+VIA_IER
+         00007FEF          = VIA2_ORAN       .equ    VIA2+VIA_ORAN
+         00007FEF          = VIA2_IRAN       .equ    VIA2+VIA_IRAN
 
                              ;===============================================================================
                              ; ASCII Control Characters
@@ -1301,9 +1415,9 @@ Portable 65xx Assembler [20.01]
 00:044F' ????              :                 .word   EM_STZ-1
 00:0451' ????              :                 .word   EM_TAX-1
 00:0453' ????              :                 .word   EM_TAY-1
-00:0455' ????              :                 .word   EM_TSB-1
-00:0457' ????              :                 .word   EM_TRB-1
-00:0459' ????              :                 .word   EM_TXS-1
+00:0455' ????              :                 .word   EM_TRB-1
+00:0457' ????              :                 .word   EM_TSB-1
+00:0459' ????              :                 .word   EM_TSX-1
 00:045B' ????              :                 .word   EM_TXA-1
 00:045D' ????              :                 .word   EM_TXS-1
 00:045F' ????              :                 .word   EM_TYA-1
@@ -1379,7 +1493,7 @@ Portable 65xx Assembler [20.01]
 00:049A' 4C????            :                  jmp    SaveAP
 
                              EM_ORA:
-00:049D' 31F7              :                  and    (ADDR_S),y
+00:049D' 11F7              :                  ora    (ADDR_S),y
 00:049F' 4C????            :                  jmp    SaveAP
 
                              EM_BIT:
@@ -2825,387 +2939,455 @@ Portable 65xx Assembler [20.01]
 
 Symbol Table
 
-ACIA                             00007F80  | ACIA_DATA                        00000000
-ACIA_CMD                         00000002  | MB_IMP                           00000000
-ACIA_CMD_DTR                     00000001  | MO_IMP                           00000000
-ACIA_CMD_IRD                     00000002  | OP_ERR                           00000000
-ACIA_CMD_PMC0                    00000040  | TTL_STR                          00000000
-ACIA_CMD_PMC1                    00000080  | VIA_IRB                          00000000
-ACIA_CMD_PME                     00000020  | VIA_ORB                          00000000
-ACIA_CMD_REM                     00000010  | __6501__                         00000000
-ACIA_CMD_TIC0                    00000004  | __6502__                         00000000
-ACIA_CMD_TIC1                    00000008  | __65816__                        00000000
-ACIA_CR                          00000003  | __65832__                        00000000
-ACIA_CR_RCS                      00000010  | __65SC02__                       00000000
-ACIA_CR_SBN                      00000080  | ACIA_CMD_DTR                     00000001
-ACIA_CR_SBR0                     00000001  | ACIA_CR_SBR0                     00000001
-ACIA_CR_SBR1                     00000002  | ACIA_SR                          00000001
-ACIA_CR_SBR2                     00000004  | ACIA_SR_PE                       00000001
-ACIA_CR_SBR3                     00000008  | C                                00000001
-ACIA_CR_WL0                      00000020  | MB_ZPG                           00000001
-ACIA_CR_WL1                      00000040  | MO_ZPG                           00000001
-ACIA_DATA                        00000000  | SOH                              00000001
-ACIA_SR                          00000001  | VIA_ACR_PB                       00000001
-ACIA_SR_DCDB                     00000020  | VIA_IER_CA2                      00000001
-ACIA_SR_DSRB                     00000040  | VIA_IFR_CA2                      00000001
-ACIA_SR_FE                       00000002  | VIA_IRA                          00000001
-ACIA_SR_IRQ                      00000080  | VIA_ORA                          00000001
-ACIA_SR_OVRN                     00000004  | VIA_PCR_CA1C                     00000001
-ACIA_SR_PE                       00000001  | __65C02__                        00000001
-ACIA_SR_RDRF                     00000008  | ACIA_CMD                         00000002
-ACIA_SR_TDRE                     00000010  | ACIA_CMD_IRD                     00000002
-ACK                              00000006  | ACIA_CR_SBR1                     00000002
-ADDR_E                           000000F9  | ACIA_SR_FE                       00000002
-ADDR_S                           000000F7  | MB_IMM                           00000002
-A_REG                            000000F0  | MO_IMM                           00000002
-A_STR                            00000021  | OP_ADC                           00000002
-AppendChar                       00000721' | VIA_ACR_PA                       00000002
-AppendHex                        0000071E' | VIA_DDRB                         00000002
-AppendHex2                       00000715' | VIA_IER_CA1                      00000002
-B                                00000010  | VIA_IFR_CA1                      00000002
-BEL                              00000007  | VIA_PCR_CA2C0                    00000002
-BITS                             00000A89' | Z                                00000002
-BRK                              000000B4' | ACIA_CR                          00000003
-BS                               00000008  | MB_ABS                           00000003
-Bar                              00000977' | MNEMONICS                        00000003'
-BumpAddr                         000006E0' | MO_ABS                           00000003
-C                                00000001  | VIA_DDRA                         00000003
-CAN                              00000018  | ACIA_CMD_TIC0                    00000004
-CMD_LEN                          000000F6  | ACIA_CR_SBR2                     00000004
-CMD_SIZE                         00000080  | ACIA_SR_OVRN                     00000004
-COMMAND                          00000200  | EOT                              00000004
-COUNT                            000000FD  | I                                00000004
-CR                               0000000D  | MB_YRG                           00000004
-CheckEnd                         000006EC' | OP_AND                           00000004
+ACIA1                            00007F80  | ACIA_DATA                        00000000
+ACIA1_CMD                        00007F82  | MB_IMP                           00000000
+ACIA1_CR                         00007F83  | MO_IMP                           00000000
+ACIA1_DATA                       00007F80  | OP_ERR                           00000000
+ACIA1_SR                         00007F81  | PIA_DDRA                         00000000
+ACIA_CMD                         00000002  | PIA_ORA                          00000000
+ACIA_CMD_DTR                     00000001  | TTL_STR                          00000000
+ACIA_CMD_IRD                     00000002  | VIA_IRB                          00000000
+ACIA_CMD_PMC0                    00000040  | VIA_ORB                          00000000
+ACIA_CMD_PMC1                    00000080  | __6501__                         00000000
+ACIA_CMD_PME                     00000020  | __6502__                         00000000
+ACIA_CMD_REM                     00000010  | __65816__                        00000000
+ACIA_CMD_TIC0                    00000004  | __65832__                        00000000
+ACIA_CMD_TIC1                    00000008  | __65SC02__                       00000000
+ACIA_CR                          00000003  | ACIA_CMD_DTR                     00000001
+ACIA_CR_RCS                      00000010  | ACIA_CR_SBR0                     00000001
+ACIA_CR_SBN                      00000080  | ACIA_SR                          00000001
+ACIA_CR_SBR0                     00000001  | ACIA_SR_PE                       00000001
+ACIA_CR_SBR1                     00000002  | C                                00000001
+ACIA_CR_SBR2                     00000004  | MB_ZPG                           00000001
+ACIA_CR_SBR3                     00000008  | MO_ZPG                           00000001
+ACIA_CR_WL0                      00000020  | PIA_CRA                          00000001
+ACIA_CR_WL1                      00000040  | PIA_CRA_CA10                     00000001
+ACIA_DATA                        00000000  | PIA_CRB_CB10                     00000001
+ACIA_SR                          00000001  | SOH                              00000001
+ACIA_SR_DCDB                     00000020  | VIA_ACR_PB                       00000001
+ACIA_SR_DSRB                     00000040  | VIA_IER_CA2                      00000001
+ACIA_SR_FE                       00000002  | VIA_IFR_CA2                      00000001
+ACIA_SR_IRQ                      00000080  | VIA_IRA                          00000001
+ACIA_SR_OVRN                     00000004  | VIA_ORA                          00000001
+ACIA_SR_PE                       00000001  | VIA_PCR_CA1C                     00000001
+ACIA_SR_RDRF                     00000008  | __65C02__                        00000001
+ACIA_SR_TDRE                     00000010  | ACIA_CMD                         00000002
+ACK                              00000006  | ACIA_CMD_IRD                     00000002
+ADDR_E                           000000F9  | ACIA_CR_SBR1                     00000002
+ADDR_S                           000000F7  | ACIA_SR_FE                       00000002
+A_REG                            000000F0  | MB_IMM                           00000002
+A_STR                            00000021  | MO_IMM                           00000002
+AppendChar                       00000721' | OP_ADC                           00000002
+AppendHex                        0000071E' | PIA_CRA_CA11                     00000002
+AppendHex2                       00000715' | PIA_CRB_CB11                     00000002
+B                                00000010  | PIA_DDRB                         00000002
+BEL                              00000007  | PIA_ORB                          00000002
+BITS                             00000A89' | VIA_ACR_PA                       00000002
+BRK                              000000B4' | VIA_DDRB                         00000002
+BS                               00000008  | VIA_IER_CA1                      00000002
+Bar                              00000977' | VIA_IFR_CA1                      00000002
+BumpAddr                         000006E0' | VIA_PCR_CA2C0                    00000002
+C                                00000001  | Z                                00000002
+CAN                              00000018  | ACIA_CR                          00000003
+CMD_LEN                          000000F6  | MB_ABS                           00000003
+CMD_SIZE                         00000080  | MNEMONICS                        00000003'
 
 Portable 65xx Assembler [20.01]
 
-D                                00000008  | VIA_ACR_SRC0                     00000004
-DC1                              00000011  | VIA_IER_SR                       00000004
-DC3                              00000013  | VIA_IFR_SR                       00000004
-DEL                              0000007F  | VIA_PCR_CA2C1                    00000004
-DO_IRQ                           00000D50' | VIA_T1CL                         00000004
-DO_NMI                           00000D53' | MO_ZPY                           00000005
-Disassemble                      000007F1' | VIA_T1CH                         00000005
-Disassemble.Skip                 00000827' | ACK                              00000006
-DumpRegisters                    000007AE' | OP_ASL                           00000006
-EMULATE                          000003D5' | VIA_T1LL                         00000006
-EM_ADC                           0000047F' | BEL                              00000007
-EM_AND                           00000493' | MO_ABY                           00000007
-EM_ASL                           000004C1' | VIA_T1LH                         00000007
-EM_BBR                           0000060C' | ACIA_CMD_TIC1                    00000008
-EM_BBS                           0000061E' | ACIA_CR_SBR3                     00000008
-EM_BCC                           00000509' | ACIA_SR_RDRF                     00000008
-EM_BCS                           0000050E' | BS                               00000008
-EM_BEQ                           00000513' | D                                00000008
-EM_BIT                           000004A2' | MB_XRG                           00000008
-EM_BMI                           00000518' | OP_BBR                           00000008
-EM_BNE                           0000051D' | VIA_ACR_SRC1                     00000008
-EM_BPL                           00000522' | VIA_IER_CB2                      00000008
-EM_BRA                           00000527' | VIA_IFR_CB2                      00000008
-EM_BRK                           000005AD' | VIA_PCR_CA2C2                    00000008
-EM_BVC                           00000532' | VIA_T2CL                         00000008
-EM_BVS                           00000537' | MO_ZPX                           00000009
-EM_CLC                           00000463' | VIA_T2CH                         00000009
-EM_CLD                           00000467' | LF                               0000000A
-EM_CLI                           0000046B' | OP_BBS                           0000000A
-EM_CLV                           0000046F' | VIA_SR                           0000000A
-EM_CMP                           0000048E' | MO_ABX                           0000000B
-EM_CPX                           00000489' | VIA_ACR                          0000000B
-EM_CPY                           0000048C' | OP_BCC                           0000000C
-EM_DEC                           000004E1' | VIA_PCR                          0000000C
-EM_DEX                           000004EB' | CR                               0000000D
-EM_DEY                           000004F0' | VIA_IFR                          0000000D
-EM_EOR                           00000498' | OP_BCS                           0000000E
-EM_ERR                           00000697' | VIA_IER                          0000000E
-EM_INC                           000004F5' | VIA_IRAN                         0000000F
-EM_INX                           000004FF' | VIA_ORAN                         0000000F
-EM_INY                           00000504' | ACIA_CMD_REM                     00000010
-EM_JMP                           0000054A' | ACIA_CR_RCS                      00000010
-EM_JSR                           0000053C' | ACIA_SR_TDRE                     00000010
-EM_LDA                           00000555' | B                                00000010
-EM_LDX                           0000055A' | MB_ACC                           00000010
-EM_LDY                           00000561' | MO_ACC                           00000010
-EM_LSR                           000004C9' | OP_BEQ                           00000010
-EM_NOP                           000005AA' | VIA_ACR_SRC2                     00000010
-EM_ORA                           0000049D' | VIA_IER_CB1                      00000010
-EM_PHA                           0000057C' | VIA_IFR_CB1                      00000010
-EM_PHP                           00000580' | VIA_PCR_CB1C                     00000010
-EM_PHX                           00000586' | DC1                              00000011
-EM_PHY                           0000058C' | OP_BIT                           00000012
-EM_PLA                           00000592' | DC3                              00000013
+COMMAND                          00000200  | MO_ABS                           00000003
+COUNT                            000000FD  | PIA_CRB                          00000003
+CR                               0000000D  | VIA_DDRA                         00000003
+CheckEnd                         000006EC' | ACIA_CMD_TIC0                    00000004
+D                                00000008  | ACIA_CR_SBR2                     00000004
+DC1                              00000011  | ACIA_SR_OVRN                     00000004
+DC3                              00000013  | EOT                              00000004
+DEL                              0000007F  | I                                00000004
+DO_IRQ                           00000D50' | MB_YRG                           00000004
+DO_NMI                           00000D53' | OP_AND                           00000004
+Disassemble                      000007F1' | PIA_CRA_DDRA                     00000004
+Disassemble.Skip                 00000827' | PIA_CRB_DDRB                     00000004
+DumpRegisters                    000007AE' | VIA_ACR_SRC0                     00000004
+EMULATE                          000003D5' | VIA_IER_SR                       00000004
+EM_ADC                           0000047F' | VIA_IFR_SR                       00000004
+EM_AND                           00000493' | VIA_PCR_CA2C1                    00000004
+EM_ASL                           000004C1' | VIA_T1CL                         00000004
+EM_BBR                           0000060C' | MO_ZPY                           00000005
+EM_BBS                           0000061E' | VIA_T1CH                         00000005
+EM_BCC                           00000509' | ACK                              00000006
+EM_BCS                           0000050E' | OP_ASL                           00000006
+EM_BEQ                           00000513' | VIA_T1LL                         00000006
+EM_BIT                           000004A2' | BEL                              00000007
+EM_BMI                           00000518' | MO_ABY                           00000007
+EM_BNE                           0000051D' | VIA_T1LH                         00000007
+EM_BPL                           00000522' | ACIA_CMD_TIC1                    00000008
+EM_BRA                           00000527' | ACIA_CR_SBR3                     00000008
+EM_BRK                           000005AD' | ACIA_SR_RDRF                     00000008
+EM_BVC                           00000532' | BS                               00000008
+EM_BVS                           00000537' | D                                00000008
+EM_CLC                           00000463' | MB_XRG                           00000008
+EM_CLD                           00000467' | OP_BBR                           00000008
+EM_CLI                           0000046B' | PIA_CRA_CA20                     00000008
+EM_CLV                           0000046F' | PIA_CRB_CB20                     00000008
+EM_CMP                           0000048E' | VIA_ACR_SRC1                     00000008
+EM_CPX                           00000489' | VIA_IER_CB2                      00000008
+EM_CPY                           0000048C' | VIA_IFR_CB2                      00000008
+EM_DEC                           000004E1' | VIA_PCR_CA2C2                    00000008
+EM_DEX                           000004EB' | VIA_T2CL                         00000008
+EM_DEY                           000004F0' | MO_ZPX                           00000009
+EM_EOR                           00000498' | VIA_T2CH                         00000009
+EM_ERR                           00000697' | LF                               0000000A
+EM_INC                           000004F5' | OP_BBS                           0000000A
+EM_INX                           000004FF' | VIA_SR                           0000000A
+EM_INY                           00000504' | MO_ABX                           0000000B
+EM_JMP                           0000054A' | VIA_ACR                          0000000B
+EM_JSR                           0000053C' | OP_BCC                           0000000C
+EM_LDA                           00000555' | VIA_PCR                          0000000C
+EM_LDX                           0000055A' | CR                               0000000D
+EM_LDY                           00000561' | VIA_IFR                          0000000D
+EM_LSR                           000004C9' | OP_BCS                           0000000E
+EM_NOP                           000005AA' | VIA_IER                          0000000E
+EM_ORA                           0000049D' | VIA_IRAN                         0000000F
+EM_PHA                           0000057C' | VIA_ORAN                         0000000F
 
 Portable 65xx Assembler [20.01]
 
-EM_PLP                           00000596' | OP_BMI                           00000014
-EM_PLX                           0000059E' | PC_STR                           00000014
-EM_PLY                           000005A4' | NAK                              00000015
-EM_RMB                           00000630' | OP_BNE                           00000016
-EM_ROL                           000004D1' | CAN                              00000018
-EM_ROR                           000004D9' | OP_BPL                           00000018
-EM_RTI                           000005C5' | SP_STR                           00000018
-EM_RTS                           000005D3' | OP_BRA                           0000001A
-EM_SBC                           00000484' | ESC                              0000001B
-EM_SEC                           00000473' | OP_BRK                           0000001C
-EM_SED                           00000477' | P_STR                            0000001D
-EM_SEI                           0000047B' | OP_BVC                           0000001E
-EM_SMB                           00000642' | ACIA_CMD_PME                     00000020
-EM_STA                           00000568' | ACIA_CR_WL0                      00000020
-EM_STP                           000005E2' | ACIA_SR_DCDB                     00000020
-EM_STX                           0000056D' | MB_BIT                           00000020
-EM_STY                           00000572' | OP_BVS                           00000020
-EM_STZ                           00000577' | VIA_ACR_T2C                      00000020
-EM_TAX                           000005E8' | VIA_IER_T2                       00000020
-EM_TAY                           000005EF' | VIA_IFR_T2                       00000020
-EM_TRB                           00000654' | VIA_PCR_CB2C0                    00000020
-EM_TSB                           0000066B' | A_STR                            00000021
-EM_TSX                           000005F6' | MO_BIT                           00000021
-EM_TXA                           000005FC' | OP_CLC                           00000022
-EM_TXS                           00000601' | OP_CLD                           00000024
-EM_TYA                           00000607' | X_STR                            00000025
-EM_WAI                           000005E5' | OP_CLI                           00000026
-EOT                              00000004  | OP_CLV                           00000028
-ERR_STR                          0000002D  | Y_STR                            00000029
-ESC                              0000001B  | OP_CMP                           0000002A
-Error                            000006C6' | OP_CPX                           0000002C
-ExtractLetter                    00000937' | ERR_STR                          0000002D
-FLAG                             00000A81' | OP_CPY                           0000002E
-FOSC                             007A1200  | OP_DEC                           00000030
-GetByte                          0000074E' | HLP_STR                          00000031
-GetNybble                        00000781' | OP_DEX                           00000032
-GetWord                          0000074A' | OP_DEY                           00000034
-HLP_STR                          00000031  | OP_EOR                           00000036
-I                                00000004  | OP_INC                           00000038
-IRQ                              00000D00' | OP_INX                           0000003A
-IRQV                             00007E70  | OP_INY                           0000003C
-IsHex                            00000792' | OP_JMP                           0000003E
-IsPrintable                      000007A2' | ACIA_CMD_PMC0                    00000040
-LF                               0000000A  | ACIA_CR_WL1                      00000040
-MASK                             00000A91' | ACIA_SR_DSRB                     00000040
-MB_ABS                           00000003  | MB_REL                           00000040
-MB_ACC                           00000010  | MO_REL                           00000040
-MB_BIT                           00000020  | OP_JSR                           00000040
-MB_IMM                           00000002  | V                                00000040
-MB_IMP                           00000000  | VIA_ACR_T1C0                     00000040
-MB_IND                           00000080  | VIA_IER_T1                       00000040
-MB_REL                           00000040  | VIA_IFR_T1                       00000040
-MB_XRG                           00000008  | VIA_PCR_CB2C1                    00000040
-MB_YRG                           00000004  | OP_LDA                           00000042
+EM_PHP                           00000580' | ACIA_CMD_REM                     00000010
+EM_PHX                           00000586' | ACIA_CR_RCS                      00000010
+EM_PHY                           0000058C' | ACIA_SR_TDRE                     00000010
+EM_PLA                           00000592' | B                                00000010
+EM_PLP                           00000596' | MB_ACC                           00000010
+EM_PLX                           0000059E' | MO_ACC                           00000010
+EM_PLY                           000005A4' | OP_BEQ                           00000010
+EM_RMB                           00000630' | PIA_CRA_CA21                     00000010
+EM_ROL                           000004D1' | PIA_CRB_CB21                     00000010
+EM_ROR                           000004D9' | VIA_ACR_SRC2                     00000010
+EM_RTI                           000005C5' | VIA_IER_CB1                      00000010
+EM_RTS                           000005D3' | VIA_IFR_CB1                      00000010
+EM_SBC                           00000484' | VIA_PCR_CB1C                     00000010
+EM_SEC                           00000473' | DC1                              00000011
+EM_SED                           00000477' | OP_BIT                           00000012
+EM_SEI                           0000047B' | DC3                              00000013
+EM_SMB                           00000642' | OP_BMI                           00000014
+EM_STA                           00000568' | PC_STR                           00000014
+EM_STP                           000005E2' | NAK                              00000015
+EM_STX                           0000056D' | OP_BNE                           00000016
+EM_STY                           00000572' | CAN                              00000018
+EM_STZ                           00000577' | OP_BPL                           00000018
+EM_TAX                           000005E8' | SP_STR                           00000018
+EM_TAY                           000005EF' | OP_BRA                           0000001A
+EM_TRB                           00000654' | ESC                              0000001B
+EM_TSB                           0000066B' | OP_BRK                           0000001C
+EM_TSX                           000005F6' | P_STR                            0000001D
+EM_TXA                           000005FC' | OP_BVC                           0000001E
+EM_TXS                           00000601' | ACIA_CMD_PME                     00000020
+EM_TYA                           00000607' | ACIA_CR_WL0                      00000020
+EM_WAI                           000005E5' | ACIA_SR_DCDB                     00000020
+EOT                              00000004  | MB_BIT                           00000020
+ERR_STR                          0000002D  | OP_BVS                           00000020
+ESC                              0000001B  | PIA_CRA_CA22                     00000020
+Error                            000006C6' | PIA_CRB_CB22                     00000020
+ExtractLetter                    00000937' | VIA_ACR_T2C                      00000020
+FLAG                             00000A81' | VIA_IER_T2                       00000020
+FOSC                             007A1200  | VIA_IFR_T2                       00000020
+GetByte                          0000074E' | VIA_PCR_CB2C0                    00000020
+GetNybble                        00000781' | A_STR                            00000021
+GetWord                          0000074A' | MO_BIT                           00000021
+HLP_STR                          00000031  | OP_CLC                           00000022
+I                                00000004  | OP_CLD                           00000024
+IRQ                              00000D00' | X_STR                            00000025
+IRQV                             00007E70  | OP_CLI                           00000026
+IsHex                            00000792' | OP_CLV                           00000028
+IsPrintable                      000007A2' | Y_STR                            00000029
+LF                               0000000A  | OP_CMP                           0000002A
+MASK                             00000A91' | OP_CPX                           0000002C
+MB_ABS                           00000003  | ERR_STR                          0000002D
+MB_ACC                           00000010  | OP_CPY                           0000002E
+MB_BIT                           00000020  | OP_DEC                           00000030
+MB_IMM                           00000002  | HLP_STR                          00000031
+MB_IMP                           00000000  | OP_DEX                           00000032
 
 Portable 65xx Assembler [20.01]
 
-MB_ZPG                           00000001  | OP_LDX                           00000044
-MNEMONICS                        00000003' | OP_LDY                           00000046
-MODES                            00000C00' | OP_LSR                           00000048
-MO_ABS                           00000003  | OP_NOP                           0000004A
-MO_ABX                           0000000B  | OP_ORA                           0000004C
-MO_ABY                           00000007  | OP_PHA                           0000004E
-MO_ACC                           00000010  | OP_PHP                           00000050
-MO_BIT                           00000021  | OP_PHX                           00000052
-MO_BRL                           00000061  | OP_PHY                           00000054
-MO_IAB                           00000083  | OP_PLA                           00000056
-MO_IAX                           0000008B  | OP_PLP                           00000058
-MO_IMM                           00000002  | OP_PLX                           0000005A
-MO_IMP                           00000000  | OP_PLY                           0000005C
-MO_IZP                           00000081  | OP_RMB                           0000005E
-MO_IZX                           00000089  | OP_ROL                           00000060
-MO_IZY                           00000085  | MO_BRL                           00000061
-MO_REL                           00000040  | OP_ROR                           00000062
-MO_ZPG                           00000001  | OP_RTI                           00000064
-MO_ZPX                           00000009  | OP_RTS                           00000066
-MO_ZPY                           00000005  | OP_SBC                           00000068
-N                                00000080  | OP_SEC                           0000006A
-NAK                              00000015  | OP_SED                           0000006C
-NMI                              00000D10' | OP_SEI                           0000006E
-NMIV                             00007E72  | OP_SMB                           00000070
-NewCommand                       000000E1' | OP_STA                           00000072
-NewLine                          0000097C' | OP_STP                           00000074
-NextChar                         00000728' | OP_STX                           00000076
-OPCODES                          00000B00' | OP_STY                           00000078
-OP_ADC                           00000002  | OP_STZ                           0000007A
-OP_AND                           00000004  | OP_TAX                           0000007C
-OP_ASL                           00000006  | OP_TAY                           0000007E
-OP_BBR                           00000008  | DEL                              0000007F
-OP_BBS                           0000000A  | ACIA_CMD_PMC1                    00000080
-OP_BCC                           0000000C  | ACIA_CR_SBN                      00000080
-OP_BCS                           0000000E  | ACIA_SR_IRQ                      00000080
-OP_BEQ                           00000010  | CMD_SIZE                         00000080
-OP_BIT                           00000012  | MB_IND                           00000080
-OP_BMI                           00000014  | N                                00000080
-OP_BNE                           00000016  | OP_TRB                           00000080
-OP_BPL                           00000018  | VIA_ACR_T1C1                     00000080
-OP_BRA                           0000001A  | VIA_IER_SET                      00000080
-OP_BRK                           0000001C  | VIA_IFR_IRQ                      00000080
-OP_BVC                           0000001E  | VIA_PCR_CB2C2                    00000080
-OP_BVS                           00000020  | MO_IZP                           00000081
-OP_CLC                           00000022  | OP_TSB                           00000082
-OP_CLD                           00000024  | MO_IAB                           00000083
-OP_CLI                           00000026  | OP_TSX                           00000084
-OP_CLV                           00000028  | MO_IZY                           00000085
-OP_CMP                           0000002A  | OP_TXA                           00000086
-OP_CPX                           0000002C  | OP_TXS                           00000088
-OP_CPY                           0000002E  | MO_IZX                           00000089
-OP_DEC                           00000030  | OP_TYA                           0000008A
-OP_DEX                           00000032  | MO_IAX                           0000008B
-OP_DEY                           00000034  | OP_WAI                           0000008C
+MB_IND                           00000080  | OP_DEY                           00000034
+MB_REL                           00000040  | OP_EOR                           00000036
+MB_XRG                           00000008  | OP_INC                           00000038
+MB_YRG                           00000004  | OP_INX                           0000003A
+MB_ZPG                           00000001  | OP_INY                           0000003C
+MNEMONICS                        00000003' | OP_JMP                           0000003E
+MODES                            00000C00' | ACIA_CMD_PMC0                    00000040
+MO_ABS                           00000003  | ACIA_CR_WL1                      00000040
+MO_ABX                           0000000B  | ACIA_SR_DSRB                     00000040
+MO_ABY                           00000007  | MB_REL                           00000040
+MO_ACC                           00000010  | MO_REL                           00000040
+MO_BIT                           00000021  | OP_JSR                           00000040
+MO_BRL                           00000061  | PIA_CRA_IRQA2                    00000040
+MO_IAB                           00000083  | PIA_CRB_IRQB2                    00000040
+MO_IAX                           0000008B  | V                                00000040
+MO_IMM                           00000002  | VIA_ACR_T1C0                     00000040
+MO_IMP                           00000000  | VIA_IER_T1                       00000040
+MO_IZP                           00000081  | VIA_IFR_T1                       00000040
+MO_IZX                           00000089  | VIA_PCR_CB2C1                    00000040
+MO_IZY                           00000085  | OP_LDA                           00000042
+MO_REL                           00000040  | OP_LDX                           00000044
+MO_ZPG                           00000001  | OP_LDY                           00000046
+MO_ZPX                           00000009  | OP_LSR                           00000048
+MO_ZPY                           00000005  | OP_NOP                           0000004A
+N                                00000080  | OP_ORA                           0000004C
+NAK                              00000015  | OP_PHA                           0000004E
+NMI                              00000D10' | OP_PHP                           00000050
+NMIV                             00007E72  | OP_PHX                           00000052
+NewCommand                       000000E1' | OP_PHY                           00000054
+NewLine                          0000097C' | OP_PLA                           00000056
+NextChar                         00000728' | OP_PLP                           00000058
+OPCODES                          00000B00' | OP_PLX                           0000005A
+OP_ADC                           00000002  | OP_PLY                           0000005C
+OP_AND                           00000004  | OP_RMB                           0000005E
+OP_ASL                           00000006  | OP_ROL                           00000060
+OP_BBR                           00000008  | MO_BRL                           00000061
+OP_BBS                           0000000A  | OP_ROR                           00000062
+OP_BCC                           0000000C  | OP_RTI                           00000064
+OP_BCS                           0000000E  | OP_RTS                           00000066
+OP_BEQ                           00000010  | OP_SBC                           00000068
+OP_BIT                           00000012  | OP_SEC                           0000006A
+OP_BMI                           00000014  | OP_SED                           0000006C
+OP_BNE                           00000016  | OP_SEI                           0000006E
+OP_BPL                           00000018  | OP_SMB                           00000070
+OP_BRA                           0000001A  | OP_STA                           00000072
+OP_BRK                           0000001C  | OP_STP                           00000074
+OP_BVC                           0000001E  | OP_STX                           00000076
+OP_BVS                           00000020  | OP_STY                           00000078
+OP_CLC                           00000022  | OP_STZ                           0000007A
+OP_CLD                           00000024  | OP_TAX                           0000007C
+OP_CLI                           00000026  | OP_TAY                           0000007E
+OP_CLV                           00000028  | DEL                              0000007F
+OP_CMP                           0000002A  | ACIA_CMD_PMC1                    00000080
+OP_CPX                           0000002C  | ACIA_CR_SBN                      00000080
 
 Portable 65xx Assembler [20.01]
 
-OP_EOR                           00000036  | RESET                            00000091'
-OP_ERR                           00000000  | VECTORS                          000000B0'
-OP_INC                           00000038  | BRK                              000000B4'
-OP_INX                           0000003A  | ShowRegisters                    000000CB'
-OP_INY                           0000003C  | NewCommand                       000000E1'
-OP_JMP                           0000003E  | RptCommand                       000000E3'
-OP_JSR                           00000040  | A_REG                            000000F0
-OP_LDA                           00000042  | X_REG                            000000F1
-OP_LDX                           00000044  | Y_REG                            000000F2
-OP_LDY                           00000046  | P_REG                            000000F3
-OP_LSR                           00000048  | PC_REG                           000000F4
-OP_NOP                           0000004A  | CMD_LEN                          000000F6
-OP_ORA                           0000004C  | ADDR_S                           000000F7
-OP_PHA                           0000004E  | ADDR_E                           000000F9
-OP_PHP                           00000050  | TEMP                             000000FB
-OP_PHX                           00000052  | COUNT                            000000FD
-OP_PHY                           00000054  | STACK                            00000100
-OP_PLA                           00000056  | RptCommand.FillFail              000001BA'
-OP_PLP                           00000058  | COMMAND                          00000200
-OP_PLX                           0000005A  | RptCommand.S19Fail               000002A0'
-OP_PLY                           0000005C  | Trace                            000002CB'
-OP_RMB                           0000005E  | EMULATE                          000003D5'
-OP_ROL                           00000060  | EM_CLC                           00000463'
-OP_ROR                           00000062  | EM_CLD                           00000467'
-OP_RTI                           00000064  | EM_CLI                           0000046B'
-OP_RTS                           00000066  | EM_CLV                           0000046F'
-OP_SBC                           00000068  | EM_SEC                           00000473'
-OP_SEC                           0000006A  | EM_SED                           00000477'
-OP_SED                           0000006C  | EM_SEI                           0000047B'
-OP_SEI                           0000006E  | EM_ADC                           0000047F'
-OP_SMB                           00000070  | EM_SBC                           00000484'
-OP_STA                           00000072  | EM_CPX                           00000489'
-OP_STP                           00000074  | EM_CPY                           0000048C'
-OP_STX                           00000076  | EM_CMP                           0000048E'
-OP_STY                           00000078  | EM_AND                           00000493'
-OP_STZ                           0000007A  | EM_EOR                           00000498'
-OP_TAX                           0000007C  | EM_ORA                           0000049D'
-OP_TAY                           0000007E  | EM_BIT                           000004A2'
-OP_TRB                           00000080  | EM_ASL                           000004C1'
-OP_TSB                           00000082  | EM_LSR                           000004C9'
-OP_TSX                           00000084  | EM_ROL                           000004D1'
-OP_TXA                           00000086  | EM_ROR                           000004D9'
-OP_TXS                           00000088  | EM_DEC                           000004E1'
-OP_TYA                           0000008A  | EM_DEX                           000004EB'
-OP_WAI                           0000008C  | EM_DEY                           000004F0'
-PC_REG                           000000F4  | EM_INC                           000004F5'
-PC_STR                           00000014  | EM_INX                           000004FF'
-PIA                              00007FA0  | EM_INY                           00000504'
-P_REG                            000000F3  | EM_BCC                           00000509'
-P_STR                            0000001D  | EM_BCS                           0000050E'
-RESET                            00000091' | EM_BEQ                           00000513'
-RptCommand                       000000E3' | EM_BMI                           00000518'
-RptCommand.FillFail              000001BA' | EM_BNE                           0000051D'
-RptCommand.S19Fail               000002A0' | EM_BPL                           00000522'
+OP_CPY                           0000002E  | ACIA_SR_IRQ                      00000080
+OP_DEC                           00000030  | CMD_SIZE                         00000080
+OP_DEX                           00000032  | MB_IND                           00000080
+OP_DEY                           00000034  | N                                00000080
+OP_EOR                           00000036  | OP_TRB                           00000080
+OP_ERR                           00000000  | PIA_CRA_IRQA1                    00000080
+OP_INC                           00000038  | PIA_CRB_IRQB1                    00000080
+OP_INX                           0000003A  | VIA_ACR_T1C1                     00000080
+OP_INY                           0000003C  | VIA_IER_SET                      00000080
+OP_JMP                           0000003E  | VIA_IFR_IRQ                      00000080
+OP_JSR                           00000040  | VIA_PCR_CB2C2                    00000080
+OP_LDA                           00000042  | MO_IZP                           00000081
+OP_LDX                           00000044  | OP_TSB                           00000082
+OP_LDY                           00000046  | MO_IAB                           00000083
+OP_LSR                           00000048  | OP_TSX                           00000084
+OP_NOP                           0000004A  | MO_IZY                           00000085
+OP_ORA                           0000004C  | OP_TXA                           00000086
+OP_PHA                           0000004E  | OP_TXS                           00000088
+OP_PHP                           00000050  | MO_IZX                           00000089
+OP_PHX                           00000052  | OP_TYA                           0000008A
+OP_PHY                           00000054  | MO_IAX                           0000008B
+OP_PLA                           00000056  | OP_WAI                           0000008C
+OP_PLP                           00000058  | RESET                            00000091'
+OP_PLX                           0000005A  | VECTORS                          000000B0'
+OP_PLY                           0000005C  | BRK                              000000B4'
+OP_RMB                           0000005E  | ShowRegisters                    000000CB'
+OP_ROL                           00000060  | NewCommand                       000000E1'
+OP_ROR                           00000062  | RptCommand                       000000E3'
+OP_RTI                           00000064  | A_REG                            000000F0
+OP_RTS                           00000066  | X_REG                            000000F1
+OP_SBC                           00000068  | Y_REG                            000000F2
+OP_SEC                           0000006A  | P_REG                            000000F3
+OP_SED                           0000006C  | PC_REG                           000000F4
+OP_SEI                           0000006E  | CMD_LEN                          000000F6
+OP_SMB                           00000070  | ADDR_S                           000000F7
+OP_STA                           00000072  | ADDR_E                           000000F9
+OP_STP                           00000074  | TEMP                             000000FB
+OP_STX                           00000076  | COUNT                            000000FD
+OP_STY                           00000078  | STACK                            00000100
+OP_STZ                           0000007A  | RptCommand.FillFail              000001BA'
+OP_TAX                           0000007C  | COMMAND                          00000200
+OP_TAY                           0000007E  | RptCommand.S19Fail               000002A0'
+OP_TRB                           00000080  | Trace                            000002CB'
+OP_TSB                           00000082  | EMULATE                          000003D5'
+OP_TSX                           00000084  | EM_CLC                           00000463'
+OP_TXA                           00000086  | EM_CLD                           00000467'
+OP_TXS                           00000088  | EM_CLI                           0000046B'
+OP_TYA                           0000008A  | EM_CLV                           0000046F'
+OP_WAI                           0000008C  | EM_SEC                           00000473'
+PC_REG                           000000F4  | EM_SED                           00000477'
+PC_STR                           00000014  | EM_SEI                           0000047B'
+PIA1                             00007FA0  | EM_ADC                           0000047F'
+PIA1_CRA                         00007FA1  | EM_SBC                           00000484'
+PIA1_CRB                         00007FA3  | EM_CPX                           00000489'
 
 Portable 65xx Assembler [20.01]
 
-RxWait                           00000D33' | EM_BRA                           00000527'
-SOH                              00000001  | EM_BVC                           00000532'
-SP_STR                           00000018  | EM_BVS                           00000537'
-STACK                            00000100  | EM_JSR                           0000053C'
-STRINGS                          00000992' | EM_JMP                           0000054A'
-SaveAP                           00000680' | EM_LDA                           00000555'
-SaveNone                         00000686' | EM_LDX                           0000055A'
-SaveP                            00000682' | EM_LDY                           00000561'
-SetEndAddr                       000006D7' | EM_STA                           00000568'
-SetPrompt                        000006F9' | EM_STX                           0000056D'
-SetStartAddr                     000006CE' | EM_STY                           00000572'
-ShowHex                          0000095F' | EM_STZ                           00000577'
-ShowHex2                         00000956' | EM_PHA                           0000057C'
-ShowRegisters                    000000CB' | EM_PHP                           00000580'
-ShowString                       00000986' | EM_PHX                           00000586'
-SkipSpaces                       0000073F' | EM_PHY                           0000058C'
-Space                            00000972' | EM_PLA                           00000592'
-Space2                           0000096F' | EM_PLP                           00000596'
-TEMP                             000000FB  | EM_PLX                           0000059E'
-TTL_STR                          00000000  | EM_PLY                           000005A4'
-ToHex                            00000965' | EM_NOP                           000005AA'
-ToUpper                          00000733' | EM_BRK                           000005AD'
-Trace                            000002CB' | EM_RTI                           000005C5'
-TxWait                           00000D16' | EM_RTS                           000005D3'
-UartRx                           00000D30' | EM_STP                           000005E2'
-UartTx                           00000D11' | EM_WAI                           000005E5'
-V                                00000040  | EM_TAX                           000005E8'
-VECTORS                          000000B0' | EM_TAY                           000005EF'
-VIA1                             00007FC0  | EM_TSX                           000005F6'
-VIA2                             00007FE0  | EM_TXA                           000005FC'
-VIA2_DDRA                        00007FE3  | EM_TXS                           00000601'
-VIA2_DDRB                        00007FE2  | EM_TYA                           00000607'
-VIA2_IRA                         00007FE1  | EM_BBR                           0000060C'
-VIA2_IRB                         00007FE0  | EM_BBS                           0000061E'
-VIA2_ORA                         00007FE1  | EM_RMB                           00000630'
-VIA2_ORB                         00007FE0  | EM_SMB                           00000642'
-VIA_ACR                          0000000B  | EM_TRB                           00000654'
-VIA_ACR_PA                       00000002  | EM_TSB                           0000066B'
-VIA_ACR_PB                       00000001  | SaveAP                           00000680'
-VIA_ACR_SRC0                     00000004  | SaveP                            00000682'
-VIA_ACR_SRC1                     00000008  | SaveNone                         00000686'
-VIA_ACR_SRC2                     00000010  | EM_ERR                           00000697'
-VIA_ACR_T1C0                     00000040  | Error                            000006C6'
-VIA_ACR_T1C1                     00000080  | SetStartAddr                     000006CE'
-VIA_ACR_T2C                      00000020  | SetEndAddr                       000006D7'
-VIA_DDRA                         00000003  | BumpAddr                         000006E0'
-VIA_DDRB                         00000002  | CheckEnd                         000006EC'
-VIA_IER                          0000000E  | SetPrompt                        000006F9'
-VIA_IER_CA1                      00000002  | AppendHex2                       00000715'
-VIA_IER_CA2                      00000001  | AppendHex                        0000071E'
-VIA_IER_CB1                      00000010  | AppendChar                       00000721'
-VIA_IER_CB2                      00000008  | NextChar                         00000728'
-VIA_IER_SET                      00000080  | ToUpper                          00000733'
-VIA_IER_SR                       00000004  | SkipSpaces                       0000073F'
+PIA1_DDRA                        00007FA0  | EM_CPY                           0000048C'
+PIA1_DDRB                        00007FA2  | EM_CMP                           0000048E'
+PIA1_ORA                         00007FA0  | EM_AND                           00000493'
+PIA1_ORB                         00007FA2  | EM_EOR                           00000498'
+PIA_CRA                          00000001  | EM_ORA                           0000049D'
+PIA_CRA_CA10                     00000001  | EM_BIT                           000004A2'
+PIA_CRA_CA11                     00000002  | EM_ASL                           000004C1'
+PIA_CRA_CA20                     00000008  | EM_LSR                           000004C9'
+PIA_CRA_CA21                     00000010  | EM_ROL                           000004D1'
+PIA_CRA_CA22                     00000020  | EM_ROR                           000004D9'
+PIA_CRA_DDRA                     00000004  | EM_DEC                           000004E1'
+PIA_CRA_IRQA1                    00000080  | EM_DEX                           000004EB'
+PIA_CRA_IRQA2                    00000040  | EM_DEY                           000004F0'
+PIA_CRB                          00000003  | EM_INC                           000004F5'
+PIA_CRB_CB10                     00000001  | EM_INX                           000004FF'
+PIA_CRB_CB11                     00000002  | EM_INY                           00000504'
+PIA_CRB_CB20                     00000008  | EM_BCC                           00000509'
+PIA_CRB_CB21                     00000010  | EM_BCS                           0000050E'
+PIA_CRB_CB22                     00000020  | EM_BEQ                           00000513'
+PIA_CRB_DDRB                     00000004  | EM_BMI                           00000518'
+PIA_CRB_IRQB1                    00000080  | EM_BNE                           0000051D'
+PIA_CRB_IRQB2                    00000040  | EM_BPL                           00000522'
+PIA_DDRA                         00000000  | EM_BRA                           00000527'
+PIA_DDRB                         00000002  | EM_BVC                           00000532'
+PIA_ORA                          00000000  | EM_BVS                           00000537'
+PIA_ORB                          00000002  | EM_JSR                           0000053C'
+P_REG                            000000F3  | EM_JMP                           0000054A'
+P_STR                            0000001D  | EM_LDA                           00000555'
+RESET                            00000091' | EM_LDX                           0000055A'
+RptCommand                       000000E3' | EM_LDY                           00000561'
+RptCommand.FillFail              000001BA' | EM_STA                           00000568'
+RptCommand.S19Fail               000002A0' | EM_STX                           0000056D'
+RxWait                           00000D33' | EM_STY                           00000572'
+SOH                              00000001  | EM_STZ                           00000577'
+SP_STR                           00000018  | EM_PHA                           0000057C'
+STACK                            00000100  | EM_PHP                           00000580'
+STRINGS                          00000992' | EM_PHX                           00000586'
+SaveAP                           00000680' | EM_PHY                           0000058C'
+SaveNone                         00000686' | EM_PLA                           00000592'
+SaveP                            00000682' | EM_PLP                           00000596'
+SetEndAddr                       000006D7' | EM_PLX                           0000059E'
+SetPrompt                        000006F9' | EM_PLY                           000005A4'
+SetStartAddr                     000006CE' | EM_NOP                           000005AA'
+ShowHex                          0000095F' | EM_BRK                           000005AD'
+ShowHex2                         00000956' | EM_RTI                           000005C5'
+ShowRegisters                    000000CB' | EM_RTS                           000005D3'
+ShowString                       00000986' | EM_STP                           000005E2'
+SkipSpaces                       0000073F' | EM_WAI                           000005E5'
+Space                            00000972' | EM_TAX                           000005E8'
+Space2                           0000096F' | EM_TAY                           000005EF'
+TEMP                             000000FB  | EM_TSX                           000005F6'
+TTL_STR                          00000000  | EM_TXA                           000005FC'
+ToHex                            00000965' | EM_TXS                           00000601'
+ToUpper                          00000733' | EM_TYA                           00000607'
 
 Portable 65xx Assembler [20.01]
 
-VIA_IER_T1                       00000040  | GetWord                          0000074A'
-VIA_IER_T2                       00000020  | GetByte                          0000074E'
-VIA_IFR                          0000000D  | GetNybble                        00000781'
-VIA_IFR_CA1                      00000002  | IsHex                            00000792'
-VIA_IFR_CA2                      00000001  | IsPrintable                      000007A2'
-VIA_IFR_CB1                      00000010  | DumpRegisters                    000007AE'
-VIA_IFR_CB2                      00000008  | Disassemble                      000007F1'
-VIA_IFR_IRQ                      00000080  | Disassemble.Skip                 00000827'
-VIA_IFR_SR                       00000004  | ExtractLetter                    00000937'
-VIA_IFR_T1                       00000040  | ShowHex2                         00000956'
-VIA_IFR_T2                       00000020  | ShowHex                          0000095F'
-VIA_IRA                          00000001  | ToHex                            00000965'
-VIA_IRAN                         0000000F  | Space2                           0000096F'
-VIA_IRB                          00000000  | Space                            00000972'
-VIA_ORA                          00000001  | Bar                              00000977'
-VIA_ORAN                         0000000F  | NewLine                          0000097C'
-VIA_ORB                          00000000  | ShowString                       00000986'
-VIA_PCR                          0000000C  | STRINGS                          00000992'
-VIA_PCR_CA1C                     00000001  | FLAG                             00000A81'
-VIA_PCR_CA2C0                    00000002  | BITS                             00000A89'
-VIA_PCR_CA2C1                    00000004  | MASK                             00000A91'
-VIA_PCR_CA2C2                    00000008  | OPCODES                          00000B00'
-VIA_PCR_CB1C                     00000010  | MODES                            00000C00'
-VIA_PCR_CB2C0                    00000020  | IRQ                              00000D00'
-VIA_PCR_CB2C1                    00000040  | NMI                              00000D10'
-VIA_PCR_CB2C2                    00000080  | UartTx                           00000D11'
-VIA_SR                           0000000A  | TxWait                           00000D16'
-VIA_T1CH                         00000005  | UartRx                           00000D30'
-VIA_T1CL                         00000004  | RxWait                           00000D33'
-VIA_T1LH                         00000007  | DO_IRQ                           00000D50'
-VIA_T1LL                         00000006  | DO_NMI                           00000D53'
-VIA_T2CH                         00000009  | IRQV                             00007E70
-VIA_T2CL                         00000008  | NMIV                             00007E72
-X_REG                            000000F1  | ACIA                             00007F80
-X_STR                            00000025  | PIA                              00007FA0
-Y_REG                            000000F2  | VIA1                             00007FC0
-Y_STR                            00000029  | VIA2                             00007FE0
-Z                                00000002  | VIA2_IRB                         00007FE0
-__6501__                         00000000  | VIA2_ORB                         00007FE0
-__6502__                         00000000  | VIA2_IRA                         00007FE1
-__65816__                        00000000  | VIA2_ORA                         00007FE1
-__65832__                        00000000  | VIA2_DDRB                        00007FE2
-__65C02__                        00000001  | VIA2_DDRA                        00007FE3
+Trace                            000002CB' | EM_BBR                           0000060C'
+TxWait                           00000D16' | EM_BBS                           0000061E'
+UartRx                           00000D30' | EM_RMB                           00000630'
+UartTx                           00000D11' | EM_SMB                           00000642'
+V                                00000040  | EM_TRB                           00000654'
+VECTORS                          000000B0' | EM_TSB                           0000066B'
+VIA1                             00007FC0  | SaveAP                           00000680'
+VIA1_ACR                         00007FCB  | SaveP                            00000682'
+VIA1_DDRA                        00007FC3  | SaveNone                         00000686'
+VIA1_DDRB                        00007FC2  | EM_ERR                           00000697'
+VIA1_IER                         00007FCE  | Error                            000006C6'
+VIA1_IFR                         00007FCD  | SetStartAddr                     000006CE'
+VIA1_IRA                         00007FC1  | SetEndAddr                       000006D7'
+VIA1_IRAN                        00007FCF  | BumpAddr                         000006E0'
+VIA1_IRB                         00007FC0  | CheckEnd                         000006EC'
+VIA1_ORA                         00007FC1  | SetPrompt                        000006F9'
+VIA1_ORAN                        00007FCF  | AppendHex2                       00000715'
+VIA1_ORB                         00007FC0  | AppendHex                        0000071E'
+VIA1_PCR                         00007FCC  | AppendChar                       00000721'
+VIA1_SR                          00007FCA  | NextChar                         00000728'
+VIA1_T1CH                        00007FC5  | ToUpper                          00000733'
+VIA1_T1CL                        00007FC4  | SkipSpaces                       0000073F'
+VIA1_T1LH                        00007FC7  | GetWord                          0000074A'
+VIA1_T1LL                        00007FC6  | GetByte                          0000074E'
+VIA1_T2CH                        00007FC9  | GetNybble                        00000781'
+VIA1_T2CL                        00007FC8  | IsHex                            00000792'
+VIA2                             00007FE0  | IsPrintable                      000007A2'
+VIA2_ACR                         00007FEB  | DumpRegisters                    000007AE'
+VIA2_DDRA                        00007FE3  | Disassemble                      000007F1'
+VIA2_DDRB                        00007FE2  | Disassemble.Skip                 00000827'
+VIA2_IER                         00007FEE  | ExtractLetter                    00000937'
+VIA2_IFR                         00007FED  | ShowHex2                         00000956'
+VIA2_IRA                         00007FE1  | ShowHex                          0000095F'
+VIA2_IRAN                        00007FEF  | ToHex                            00000965'
+VIA2_IRB                         00007FE0  | Space2                           0000096F'
+VIA2_ORA                         00007FE1  | Space                            00000972'
+VIA2_ORAN                        00007FEF  | Bar                              00000977'
+VIA2_ORB                         00007FE0  | NewLine                          0000097C'
+VIA2_PCR                         00007FEC  | ShowString                       00000986'
+VIA2_SR                          00007FEA  | STRINGS                          00000992'
+VIA2_T1CH                        00007FE5  | FLAG                             00000A81'
+VIA2_T1CL                        00007FE4  | BITS                             00000A89'
+VIA2_T1LH                        00007FE7  | MASK                             00000A91'
+VIA2_T1LL                        00007FE6  | OPCODES                          00000B00'
+VIA2_T2CH                        00007FE9  | MODES                            00000C00'
+VIA2_T2CL                        00007FE8  | IRQ                              00000D00'
+VIA_ACR                          0000000B  | NMI                              00000D10'
+VIA_ACR_PA                       00000002  | UartTx                           00000D11'
+VIA_ACR_PB                       00000001  | TxWait                           00000D16'
+VIA_ACR_SRC0                     00000004  | UartRx                           00000D30'
+VIA_ACR_SRC1                     00000008  | RxWait                           00000D33'
+VIA_ACR_SRC2                     00000010  | DO_IRQ                           00000D50'
+VIA_ACR_T1C0                     00000040  | DO_NMI                           00000D53'
+VIA_ACR_T1C1                     00000080  | IRQV                             00007E70
+
+Portable 65xx Assembler [20.01]
+
+VIA_ACR_T2C                      00000020  | NMIV                             00007E72
+VIA_DDRA                         00000003  | ACIA1                            00007F80
+VIA_DDRB                         00000002  | ACIA1_DATA                       00007F80
+VIA_IER                          0000000E  | ACIA1_SR                         00007F81
+VIA_IER_CA1                      00000002  | ACIA1_CMD                        00007F82
+VIA_IER_CA2                      00000001  | ACIA1_CR                         00007F83
+VIA_IER_CB1                      00000010  | PIA1                             00007FA0
+VIA_IER_CB2                      00000008  | PIA1_DDRA                        00007FA0
+VIA_IER_SET                      00000080  | PIA1_ORA                         00007FA0
+VIA_IER_SR                       00000004  | PIA1_CRA                         00007FA1
+VIA_IER_T1                       00000040  | PIA1_DDRB                        00007FA2
+VIA_IER_T2                       00000020  | PIA1_ORB                         00007FA2
+VIA_IFR                          0000000D  | PIA1_CRB                         00007FA3
+VIA_IFR_CA1                      00000002  | VIA1                             00007FC0
+VIA_IFR_CA2                      00000001  | VIA1_IRB                         00007FC0
+VIA_IFR_CB1                      00000010  | VIA1_ORB                         00007FC0
+VIA_IFR_CB2                      00000008  | VIA1_IRA                         00007FC1
+VIA_IFR_IRQ                      00000080  | VIA1_ORA                         00007FC1
+VIA_IFR_SR                       00000004  | VIA1_DDRB                        00007FC2
+VIA_IFR_T1                       00000040  | VIA1_DDRA                        00007FC3
+VIA_IFR_T2                       00000020  | VIA1_T1CL                        00007FC4
+VIA_IRA                          00000001  | VIA1_T1CH                        00007FC5
+VIA_IRAN                         0000000F  | VIA1_T1LL                        00007FC6
+VIA_IRB                          00000000  | VIA1_T1LH                        00007FC7
+VIA_ORA                          00000001  | VIA1_T2CL                        00007FC8
+VIA_ORAN                         0000000F  | VIA1_T2CH                        00007FC9
+VIA_ORB                          00000000  | VIA1_SR                          00007FCA
+VIA_PCR                          0000000C  | VIA1_ACR                         00007FCB
+VIA_PCR_CA1C                     00000001  | VIA1_PCR                         00007FCC
+VIA_PCR_CA2C0                    00000002  | VIA1_IFR                         00007FCD
+VIA_PCR_CA2C1                    00000004  | VIA1_IER                         00007FCE
+VIA_PCR_CA2C2                    00000008  | VIA1_IRAN                        00007FCF
+VIA_PCR_CB1C                     00000010  | VIA1_ORAN                        00007FCF
+VIA_PCR_CB2C0                    00000020  | VIA2                             00007FE0
+VIA_PCR_CB2C1                    00000040  | VIA2_IRB                         00007FE0
+VIA_PCR_CB2C2                    00000080  | VIA2_ORB                         00007FE0
+VIA_SR                           0000000A  | VIA2_IRA                         00007FE1
+VIA_T1CH                         00000005  | VIA2_ORA                         00007FE1
+VIA_T1CL                         00000004  | VIA2_DDRB                        00007FE2
+VIA_T1LH                         00000007  | VIA2_DDRA                        00007FE3
+VIA_T1LL                         00000006  | VIA2_T1CL                        00007FE4
+VIA_T2CH                         00000009  | VIA2_T1CH                        00007FE5
+VIA_T2CL                         00000008  | VIA2_T1LL                        00007FE6
+X_REG                            000000F1  | VIA2_T1LH                        00007FE7
+X_STR                            00000025  | VIA2_T2CL                        00007FE8
+Y_REG                            000000F2  | VIA2_T2CH                        00007FE9
+Y_STR                            00000029  | VIA2_SR                          00007FEA
+Z                                00000002  | VIA2_ACR                         00007FEB
+__6501__                         00000000  | VIA2_PCR                         00007FEC
+__6502__                         00000000  | VIA2_IFR                         00007FED
+__65816__                        00000000  | VIA2_IER                         00007FEE
+__65832__                        00000000  | VIA2_IRAN                        00007FEF
+__65C02__                        00000001  | VIA2_ORAN                        00007FEF
 __65SC02__                       00000000  | FOSC                             007A1200
+

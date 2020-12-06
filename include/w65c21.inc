@@ -1,4 +1,10 @@
 ;===============================================================================
+; __        ____  ____   ____ ____  _ 
+; \ \      / / /_| ___| / ___|___ \/ |
+;  \ \ /\ / / '_ \___ \| |     __) | |
+;   \ V  V /| (_) |__) | |___ / __/| |
+;    \_/\_/  \___/____/ \____|_____|_|
+;                                     
 ; WDC W65C21 Peripheral Interface Adapter (PIA) Definitions
 ;-------------------------------------------------------------------------------
 ; Copyright (C)2020 Andrew Jacobs.
@@ -23,7 +29,7 @@ PIA_ORA		.equ	0		; When CRA.DDRA = 1
 PIA_DDRA	.equ	0		; When CRA.DDRA = 0
 PIA_CRA		.equ	1
 PIA_ORB		.equ	2		; When CRB.DDRB = 1
-PIA_DDRA	.equ	2		; When CRB.DDRB = 0
+PIA_DDRB	.equ	2		; When CRB.DDRB = 0
 PIA_CRB		.equ	3
 
 ; CRA Register Bits

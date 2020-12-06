@@ -940,9 +940,9 @@ EMULATE:
 		.word	EM_STZ-1
 		.word	EM_TAX-1
 		.word	EM_TAY-1
-		.word	EM_TSB-1
 		.word	EM_TRB-1
-		.word	EM_TXS-1
+		.word	EM_TSB-1
+		.word	EM_TSX-1
 		.word	EM_TXA-1
 		.word	EM_TXS-1
 		.word	EM_TYA-1
@@ -1012,7 +1012,7 @@ EM_EOR:
 		 jmp	SaveAP
 
 EM_ORA:
-		 and	(ADDR_S),y
+		 ora	(ADDR_S),y
 		 jmp	SaveAP
 
 EM_BIT:
